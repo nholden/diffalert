@@ -13,6 +13,12 @@ gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'rspec-given'
 end
 
 group :development do
