@@ -20,9 +20,11 @@ class GithubEventsController < ApplicationController
   end
 
   def create_alerts!
-    request.params.dig(:commits, :modified).each do |modified_file|
-      if trigger = user.triggers.find_by_modified_file(modified_file)
-        trigger.alerts.create!
+    if modified_files = request.params.dig(:commits, :modified)
+      modified_files.each do |modified_file|
+        if trigger = user.triggers.find_by_modified_file(modified_file)
+          trigger.alerts.create!
+        end
       end
     end
   end
