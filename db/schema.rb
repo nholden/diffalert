@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408200923) do
+ActiveRecord::Schema.define(version: 20170408202916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "alerts", force: :cascade do |t|
+    t.integer  "trigger_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["trigger_id"], name: "index_alerts_on_trigger_id", using: :btree
+  end
+
+  create_table "triggers", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "modified_file"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["user_id"], name: "index_triggers_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "github_events_secret"
