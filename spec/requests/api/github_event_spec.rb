@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Github events API" do
 
-  context "POST /user/:user_id/github" do
+  describe "POST /user/:user_id/github" do
     Given!(:user) { FactoryGirl.create(:user, github_events_secret: user_secret) }
     Given(:response_hash) { JSON.load(response.body) }
     Given(:modified_file) { "README.md" }
     Given(:request_secret) { 'abc123' }
-    Given(:request_params) { { commits: { modified: [modified_file] } } }
+    Given(:request_params) { { commits: [ { modified: [modified_file] } ] } }
 
     When { post "/user/#{user.id}/github",
            params: request_params,
