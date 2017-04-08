@@ -1,5 +1,7 @@
 class GithubEventsController < ApplicationController
 
+  skip_before_action :verify_authenticity_token
+
   def create
     if user = User.find_by_github_events_secret(request.headers['X-Hub-Signature'])
       render json: { message: 'Success' }, status: 200
