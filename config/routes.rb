@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
-  resource :github_event, path: 'github', only: %w(create)
+  resources :user, only: %w() do
+    resource :github_event, path: 'github', only: %w(create)
+  end
 
 end
