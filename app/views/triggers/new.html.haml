@@ -1,0 +1,12 @@
+= form_for @trigger, url: user_triggers_path(current_user) do |f|
+
+  - if @trigger.errors.any?
+    %ul
+      - @trigger.errors.full_messages.each do |msg|
+        %li= msg.html_safe
+
+  = f.label :modified_file, 'Filename'
+  = f.email_field :modified_file,
+    maxlength: 64
+
+  = f.submit 'Create trigger'

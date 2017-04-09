@@ -1,3 +1,7 @@
 = user.email
 
-Triggers go here.
+- user.triggers.each do |trigger|
+  = trigger.modified_file
+  = link_to 'Delete', user_trigger_path(current_user, trigger), method: :delete
+
+= link_to 'Add trigger', new_user_trigger_path(current_user)

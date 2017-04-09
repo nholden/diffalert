@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'sessions#new'
 
   resources :users, only: %w() do
-    resources :triggers, only: %w(index)
+    resources :triggers, only: %w(index new create destroy)
     resources :github_event_responses, path: 'github', only: %w(create)
   end
 
