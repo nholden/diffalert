@@ -9,11 +9,15 @@ RSpec.describe "triggers" do
     When { log_in_as user }
     When { click_link 'Add trigger' }
     When { fill_in 'Filename', with: 'README.md' }
+    When { fill_in 'Email', with: 'qwerty@slack.com' }
+    When { fill_in 'Message', with: 'README.md changed!' }
     When { click_button 'Create trigger' }
 
     Then { expect(page).to have_content 'New trigger created!' }
-    And { expect(page).to have_content 'README.md' }
+    And { expect(page).to have_content 'When README.md changes, send an email to qwerty@slack.com saying “README.md changed!”' }
     And { user.triggers.last.modified_file == 'README.md' }
+    And { user.triggers.last.email == 'qwerty@slack.com' }
+    And { user.triggers.last.message == 'README.md changed!' }
   end
 
   describe "deleting a trigger" do

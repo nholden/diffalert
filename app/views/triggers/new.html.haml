@@ -6,7 +6,15 @@
         %li= msg.html_safe
 
   = f.label :modified_file, 'Filename'
-  = f.email_field :modified_file,
+  = f.text_field :modified_file,
     maxlength: 64
+
+  = f.label :email, 'Email'
+  = f.text_field :email,
+    maxlength: 64
+
+  = f.label :message, 'Message'
+  = f.text_area :message,
+    maxlength: 256
 
   = f.submit 'Create trigger'

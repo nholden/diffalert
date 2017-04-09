@@ -15,7 +15,9 @@ RSpec.describe "authentication" do
 
       Then { expect(page).to have_content 'You’re signed up!' }
       And { expect(page).to have_content 'nick@realhq.com' }
+      And { expect(page).to have_content "Your GitHub webhook secret is #{User.last.github_events_secret}" }
       And { User.last.email == 'nick@realhq.com' }
+      And { User.last.github_events_secret.present? }
     end
 
     context "without matching passwords" do

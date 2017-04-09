@@ -1,7 +1,14 @@
-= user.email
+.triggers__email
+  = user.email
 
-- user.triggers.each do |trigger|
-  = trigger.modified_file
-  = link_to 'Delete', user_trigger_path(current_user, trigger), method: :delete
+.triggers__github-events-secret
+  Your GitHub webhook secret is #{user.github_events_secret}
 
-= link_to 'Add trigger', new_user_trigger_path(current_user)
+.triggers__triggers
+  - user.triggers.each do |trigger|
+    .triggers__trigger
+      When #{trigger.modified_file} changes, send an email to #{trigger.email} saying &ldquo;#{trigger.message}&rdquo;
+      = link_to 'Delete', user_trigger_path(user, trigger), method: :delete
+
+.triggers__new-trigger
+  = link_to 'Add trigger', new_user_trigger_path(user)

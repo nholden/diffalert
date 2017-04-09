@@ -34,7 +34,7 @@ class TriggersController < ApplicationController
   private
 
   def trigger_params
-    params.require(:trigger).permit(:modified_file)
+    params.require(:trigger).permit(:modified_file, :email, :message)
   end
 
 end
