@@ -27,4 +27,26 @@ RSpec.describe "authentication" do
     end
   end
 
+  describe "user login" do
+    Given { FactoryGirl.create(:user, email: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
+
+    When { visit new_session_path }
+    When { fill_in 'Email', with: 'nick@nickholden.io' }
+    When { fill_in 'Password', with: password }
+    When { click_button 'Login' }
+
+    context "with vaild credentials" do
+      Given(:password) { 'letmein' }
+
+      Then { expect(page).to have_content 'Welcome back!' }
+      And { expect(page).to have_content 'nick@nickholden.io' }
+    end
+
+    context "with invalid credentials" do
+      Given(:password) { 'invalid' }
+
+      Then { expect(page).to have_content 'Invalid email/password combination' }
+    end
+  end
+
 end
