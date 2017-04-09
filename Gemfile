@@ -12,6 +12,7 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'decent_exposure', '3.0.0'
+gem 'haml'
 
 group :development, :test do
   gem 'pry'
@@ -19,6 +20,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'dotenv-rails'
 end
 
 group :test do
