@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Github events API" do
+RSpec.describe "Github event responses" do
 
   describe "POST /user/:user_id/github" do
     Given!(:user) { FactoryGirl.create(:user, github_events_secret: user_secret) }
