@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'decent_exposure', '3.0.0'
 gem 'haml'
+gem 'bourbon', '5.0.0.beta.7'
+gem 'neat'
 
 group :development, :test do
   gem 'pry'
