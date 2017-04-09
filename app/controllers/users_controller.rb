@@ -1,14 +1,15 @@
 class UsersController < ApplicationController
 
-  expose :user
-
   def new
+    @user = User.new
   end
 
   def create
-    if user = User.create(user_params)
+    @user = User.new(user_params)
+
+    if @user.save
       flash[:notice] = 'You&rsquo;re signed up!'
-      redirect_to user_triggers_path(user)
+      redirect_to user_triggers_path(@user)
     else
       render 'new'
     end
