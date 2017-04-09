@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "Github event responses" do
 
-  describe "POST /user/:user_id/github" do
+  describe "POST /users/:user_id/github" do
     Given!(:user) { FactoryGirl.create(:user, github_events_secret: user_secret) }
     Given(:response_hash) { JSON.load(response.body) }
     Given(:modified_file) { "README.md" }
     Given(:request_secret) { 'abc123' }
     Given(:request_params) { { commits: [ { modified: [modified_file] } ] } }
 
-    When { post "/user/#{user.id}/github",
+    When { post "/users/#{user.id}/github",
            params: request_params,
            headers: { 'X-Hub-Signature' => 'sha1=' + OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha1'), request_secret, CGI.unescape(request_params.to_param)) } }
 
