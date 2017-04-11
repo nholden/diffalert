@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'sessions#new'
+  root to: proc { [200, {'Content-Type' => 'text/plain'}, ["Nothing to see here, yet."]] }
 
   resources :users, only: %w() do
     resources :triggers, only: %w(index new create destroy)
@@ -12,7 +12,5 @@ Rails.application.routes.draw do
 
   get '/login', to: 'sessions#new', as: 'new_session'
   post '/login', to: 'sessions#create', as: 'sessions'
-
-  get "/.well-known/acme-challenge/:id" => proc { [200, {'Content-Type' => 'text/plain'}, ["#{ENV.fetch('LETS_ENCRYPT_CHALLENGE_CODE')}"]] }
 
 end
