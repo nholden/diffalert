@@ -18,6 +18,9 @@ RSpec.describe Github::PushEvent do
           ],
         },
       ],
+      repository: {
+        name: "sandbox"
+      },
     }
   }
 
@@ -27,6 +30,10 @@ RSpec.describe Github::PushEvent do
 
   describe "#branch" do
     Then { push_event.branch == "another-branch" }
+  end
+
+  describe "#repository_name" do
+    Then { push_event.repository_name == "sandbox" }
   end
 
 end

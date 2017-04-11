@@ -9,6 +9,10 @@ module Github
       payload_hash[:ref].split('/').last
     end
 
+    def repository_name
+      payload_hash.dig(:repository, :name)
+    end
+
     private
 
     def commits

@@ -7,7 +7,21 @@ RSpec.describe "Github event responses" do
     Given(:response_hash) { JSON.load(response.body) }
     Given(:modified_file) { "README.md" }
     Given(:branch) { "master" }
-    Given(:request_params) { { ref: "refs/head/#{branch}", commits: [ { modified: [modified_file] } ] } }
+    Given(:repository_name) { "sandbox" }
+
+    Given(:request_params) {
+      {
+        ref: "refs/head/#{branch}",
+        commits: [
+          {
+            modified: [modified_file]
+          }
+        ],
+        repository: {
+          name: repository_name
+        },
+      }
+    }
 
     When { post "/users/#{user.id}/github", params: request_params }
 
@@ -17,14 +31,32 @@ RSpec.describe "Github event responses" do
       Invariant { response_hash == { 'message' => 'Success' } }
       Invariant { response.status == 200 }
 
-      context "when trigger exists for modified file and branch" do
-        Given!(:trigger) { FactoryGirl.create(:trigger, user: user, modified_file: modified_file, branch: branch) }
+      context "when trigger exists for modified file, branch, and repo" do
+        Given!(:trigger) { FactoryGirl.create(:trigger,
+                                              user: user,
+                                              modified_file: modified_file,
+                                              branch: branch,
+                                              repository_name: repository_name) }
 
         Then { user.alerts.last.trigger == trigger }
       end
 
       context "when trigger exists for modified file on different branch" do
-        Given!(:trigger) { FactoryGirl.create(:trigger, user: user, modified_file: modified_file, branch: "not-master") }
+        Given!(:trigger) { FactoryGirl.create(:trigger,
+                                              user: user,
+                                              modified_file: modified_file,
+                                              branch: "not-master",
+                                              repository_name: repository_name) }
+
+        Then { user.alerts.empty? }
+      end
+
+      context "when trigger exists for modified file on different repo" do
+        Given!(:trigger) { FactoryGirl.create(:trigger,
+                                              user: user,
+                                              modified_file: modified_file,
+                                              branch: branch,
+                                              repository_name: "not-sandbox") }
 
         Then { user.alerts.empty? }
       end
