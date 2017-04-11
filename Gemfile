@@ -15,6 +15,7 @@ gem 'decent_exposure', '3.0.0'
 gem 'haml'
 gem 'bourbon', '5.0.0.beta.7'
 gem 'neat'
+gem 'rollbar'
 
 group :development, :test do
   gem 'pry'
