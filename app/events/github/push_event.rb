@@ -5,6 +5,10 @@ module Github
       commits.map { |commit| commit[:modified] }.flatten.compact.uniq
     end
 
+    def branch
+      payload_hash[:ref].split('/').last
+    end
+
     private
 
     def commits

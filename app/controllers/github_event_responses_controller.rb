@@ -20,8 +20,10 @@ class GithubEventResponsesController < ApplicationController
   end
 
   def create_alerts!
-    Github::PushEvent.new(request.params).modified_files.each do |modified_file|
-      if trigger = user.triggers.find_by_modified_file(modified_file)
+    event = Github::PushEvent.new(request.params)
+
+    event.modified_files.each do |modified_file|
+      if trigger = user.triggers.where(modified_file: modified_file, branch: event.branch).last
         trigger.alerts.create!
       end
     end
