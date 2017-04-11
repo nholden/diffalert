@@ -6,7 +6,9 @@ module Github
     end
 
     def branch
-      payload_hash[:ref].split('/').last
+      if ref = payload_hash[:ref]
+        ref.split('/').last
+      end
     end
 
     def repository_name
