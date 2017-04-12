@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:notice] = 'You&rsquo;re signed up!'
-      redirect_to user_triggers_path(@user)
+      redirect_to triggers_path
     else
       render 'new'
     end

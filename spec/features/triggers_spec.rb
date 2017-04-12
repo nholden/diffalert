@@ -3,6 +3,24 @@ require 'support/authentication_helper'
 
 RSpec.describe "triggers" do
 
+  describe "viewing the triggers page" do
+    Given(:user) { FactoryGirl.create(:user) }
+
+    context "authenticated" do
+      When { log_in_as user }
+      When { visit triggers_path }
+
+      Then { expect(page).to have_content user.email }
+    end
+
+    context "not authenticated" do
+      When { visit triggers_path }
+
+      Then { expect(page).to_not have_content user.email }
+      And { expect(page).to have_content 'You must be logged in to view that page' }
+    end
+  end
+
   describe "creating a new trigger" do
     Given(:user) { FactoryGirl.create(:user) }
 

@@ -1,8 +1,7 @@
 class TriggersController < ApplicationController
 
-  # TODO: require authenticated user
+  include RequiresSignIn
 
-  expose :user
   expose :trigger
 
   def index
@@ -14,12 +13,12 @@ class TriggersController < ApplicationController
 
   def create
     @trigger = Trigger.new(trigger_params) do |trigger|
-      trigger.user = user
+      trigger.user = current_user
     end
 
     if @trigger.save
       flash[:notice] = 'New trigger created!'
-      redirect_to user_triggers_path(user)
+      redirect_to triggers_path
     else
       render 'new'
     end
@@ -28,7 +27,7 @@ class TriggersController < ApplicationController
   def destroy
     trigger.destroy!
     flash[:notice] = 'Trigger deleted.'
-    redirect_to user_triggers_path(user)
+    redirect_to triggers_path
   end
 
   private

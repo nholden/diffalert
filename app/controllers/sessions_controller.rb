@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       flash[:notice] = 'Welcome back!'
-      redirect_to user_triggers_path(current_user)
+      redirect_to triggers_path
     else
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'
