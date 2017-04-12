@@ -21,7 +21,7 @@ class TriggersController < ApplicationController
       flash[:notice] = 'New trigger created!'
       redirect_to user_triggers_path(user)
     else
-      render new_user_trigger_path(user)
+      render 'new'
     end
   end
 
@@ -34,7 +34,7 @@ class TriggersController < ApplicationController
   private
 
   def trigger_params
-    params.require(:trigger).permit(:modified_file, :email, :message)
+    params.require(:trigger).permit(:repository_name, :branch, :modified_file, :email, :message)
   end
 
 end

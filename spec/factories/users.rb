@@ -3,6 +3,6 @@ FactoryGirl.define do
     github_events_secret "s3cr3t"
     password "password"
     password_confirmation "password"
-    email "nick@gmail.com"
+    sequence :email { |n| "factory-email-#{n}@gmail.com" }
   end
 end

@@ -8,6 +8,8 @@ RSpec.describe "triggers" do
 
     When { log_in_as user }
     When { click_link 'Add trigger' }
+    When { fill_in 'Repository', with: 'sandbox' }
+    When { fill_in 'Branch', with: 'master' }
     When { fill_in 'Filename', with: 'README.md' }
     When { fill_in 'Email', with: 'qwerty@slack.com' }
     When { fill_in 'Message', with: 'README.md changed!' }

@@ -5,12 +5,20 @@
       - @trigger.errors.full_messages.each do |msg|
         %li= msg.html_safe
 
+  = f.label :repository_name, 'Repository'
+  = f.text_field :repository_name,
+    maxlength: 64
+
+  = f.label :branch, 'Branch'
+  = f.text_field :branch,
+    maxlength: 64
+
   = f.label :modified_file, 'Filename'
   = f.text_field :modified_file,
     maxlength: 64
 
   = f.label :email, 'Email'
-  = f.text_field :email,
+  = f.email_field :email,
     maxlength: 64
 
   = f.label :message, 'Message'
