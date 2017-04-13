@@ -34,7 +34,7 @@ RSpec.describe "triggers" do
     When { click_button 'Create trigger' }
 
     Then { expect(page).to have_content 'New trigger created!' }
-    And { expect(page).to have_content 'When README.md changes, send an email to qwerty@slack.com saying “README.md changed!”' }
+    And { expect(page).to have_content 'When README.md changes on the master branch of sandbox, send an email to qwerty@slack.com saying “README.md changed!”' }
     And { user.triggers.last.modified_file == 'README.md' }
     And { user.triggers.last.email == 'qwerty@slack.com' }
     And { user.triggers.last.message == 'README.md changed!' }
@@ -50,6 +50,23 @@ RSpec.describe "triggers" do
     Then { expect(page).to have_content 'Trigger deleted.' }
     And { expect(page).to_not have_content(trigger.modified_file) }
     And { !Trigger.find_by_id(trigger.id) }
+  end
+
+  describe "viewing the last alert for a Trigger" do
+    Given(:user) { FactoryGirl.create(:user) }
+    Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+
+    When { log_in_as user }
+
+    context "when Trigger has an alert" do
+      Given!(:alert) { FactoryGirl.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
+
+      Then { expect(page).to have_content 'Last alert was about 3 hours ago.' }
+    end
+
+    context "when Trigger does not have an alert" do
+      Then { expect(page).to have_content 'This trigger has never created an alert.' }
+    end
   end
 
 end
