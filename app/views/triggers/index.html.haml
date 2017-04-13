@@ -5,17 +5,24 @@
   Your GitHub webhook secret is #{current_user.github_events_secret}
 
 .triggers__triggers
-  - current_user.triggers.each do |trigger|
-    .triggers__trigger
-      .description
-        When #{trigger.modified_file} changes on the #{trigger.branch} branch of #{trigger.repository_name},
-        send an email to #{trigger.email} saying &ldquo;#{trigger.message}&rdquo;
-      .last-alert
-        - if trigger.alerts.any?
-          Last alert was #{time_ago_in_words(trigger.alerts.last.created_at)} ago.
-        - else
-          This trigger has never created an alert.
-      = link_to 'Delete', trigger_path(trigger), method: :delete
+  %table
+    %tr
+      %th Repository
+      %th Branch
+      %th File path
+      %th Last alert
+      %th
+    - current_user.triggers.each do |trigger|
+      %tr
+        %td= trigger.repository_name
+        %td= trigger.branch
+        %td= trigger.modified_file
+        %td
+          - if trigger.alerts.any?
+            #{time_ago_in_words(trigger.alerts.last.created_at)} ago
+          - else
+            Never
+        %td= link_to 'Delete', trigger_path(trigger), method: :delete
 
 .triggers__new-trigger
   = link_to 'Add trigger', new_trigger_path
