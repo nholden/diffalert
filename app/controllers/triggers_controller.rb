@@ -30,7 +30,7 @@ class TriggersController < ApplicationController
     redirect_to triggers_path
   end
 
-  def show
+  def edit
   end
 
   def update
@@ -38,7 +38,7 @@ class TriggersController < ApplicationController
       flash[:notice] = 'Trigger updated.'
       redirect_to triggers_path
     else
-      render 'show'
+      render 'edit'
     end
   end
 
