@@ -8,6 +8,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
+    - if current_user
+      = link_to 'Log out', session_path, method: :delete
+    - else
+      = link_to 'Log in', new_session_path
+
     - flash.each do |name, msg|
       = content_tag :div, msg.html_safe, class: name
 

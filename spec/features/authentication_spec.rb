@@ -1,8 +1,9 @@
 require 'rails_helper'
+require 'support/authentication_helper'
 
 RSpec.describe "authentication" do
 
-  describe "user sign-up" do
+  describe "sign-up" do
     When { visit new_user_path }
     When { fill_in 'Email', with: 'nick@realhq.com' }
     When { fill_in 'Password', with: password }
@@ -29,7 +30,7 @@ RSpec.describe "authentication" do
     end
   end
 
-  describe "user login" do
+  describe "login" do
     Given { FactoryGirl.create(:user, email: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
 
     When { visit new_session_path }
@@ -49,6 +50,16 @@ RSpec.describe "authentication" do
 
       Then { expect(page).to have_content 'Invalid email/password combination' }
     end
+  end
+
+  describe "log out" do
+    Given(:user) { FactoryGirl.create(:user) }
+
+    When { log_in_as user }
+    When { click_link 'Log out' }
+    When { visit triggers_path }
+
+    Then { expect(page).to have_content 'You must be logged in to view that page' }
   end
 
 end
