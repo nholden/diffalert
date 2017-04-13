@@ -18,7 +18,7 @@ RSpec.describe "triggers" do
       When { fill_in 'Filename', with: 'README.md' }
       When { fill_in 'Email', with: 'qwerty@slack.com' }
       When { fill_in 'Message', with: 'README.md changed!' }
-      When { click_button 'Create trigger' }
+      When { click_button 'Save trigger' }
 
       Then { expect(page).to have_content 'New trigger created!' }
       And { expect(page).to have_content 'sandbox' }
@@ -35,12 +35,24 @@ RSpec.describe "triggers" do
     describe "deleting a Trigger" do
       Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
 
-      When { log_in_as user }
       When { click_link 'Delete' }
 
       Then { expect(page).to have_content 'Trigger deleted.' }
       And { expect(page).to_not have_content(trigger.modified_file) }
       And { !Trigger.find_by_id(trigger.id) }
+    end
+
+    describe "editing a Trigger" do
+      Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+
+      When { click_link 'Edit' }
+      When { fill_in 'Branch', with: 'staging' }
+      When { click_button 'Save trigger' }
+      When { trigger.reload }
+
+      Then { expect(page).to have_content 'Trigger updated.' }
+      And { expect(page).to have_content 'staging' }
+      And { trigger.branch == 'staging' }
     end
 
     describe "viewing triggers" do

@@ -22,7 +22,10 @@
             #{time_ago_in_words(trigger.alerts.last.created_at)} ago
           - else
             Never
-        %td= link_to 'Delete', trigger_path(trigger), method: :delete
+        %td
+          = link_to 'Edit', trigger_path(trigger)
+          |
+          = link_to 'Delete', trigger_path(trigger), method: :delete
 
 .triggers__new-trigger
   = link_to 'Add trigger', new_trigger_path

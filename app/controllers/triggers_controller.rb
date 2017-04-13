@@ -2,7 +2,7 @@ class TriggersController < ApplicationController
 
   include RequiresSignIn
 
-  expose :trigger
+  expose :trigger, -> { current_user.triggers.find(params[:id]) }
 
   def index
   end
@@ -28,6 +28,18 @@ class TriggersController < ApplicationController
     trigger.destroy!
     flash[:notice] = 'Trigger deleted.'
     redirect_to triggers_path
+  end
+
+  def show
+  end
+
+  def update
+    if trigger.update_attributes(trigger_params)
+      flash[:notice] = 'Trigger updated.'
+      redirect_to triggers_path
+    else
+      render 'show'
+    end
   end
 
   private

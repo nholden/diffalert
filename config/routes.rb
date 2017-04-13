@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :github_event_responses, path: 'github', only: %w(create)
   end
 
-  resources :triggers, only: %w(index new create destroy)
+  resources :triggers
   resource :session, only: %w(new create destroy)
 
   get '/signup', to: 'users#new', as: 'new_user'
