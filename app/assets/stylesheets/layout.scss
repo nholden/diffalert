@@ -1,0 +1,28 @@
+.container {
+  @include grid-container;
+
+  .header {
+    padding-bottom: 2em;
+
+    .logo {
+      @include grid-column(6);
+      font-size: 2em;
+      line-height: 2.5em;
+
+      .icon, .wordmark {
+        display: inline-block;
+      }
+    }
+
+    .menu {
+      @include grid-column(6);
+      display: inline-block;
+      text-align: right;
+      line-height: 5em;
+    }
+  }
+
+  .content {
+    @include grid-column(12);
+  }
+}

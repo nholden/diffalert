@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: proc { [200, {'Content-Type' => 'text/plain'}, ["Nothing to see here, yet."]] }
+  root to: 'sessions#new'
 
   resources :users, only: %w() do
     resources :github_event_responses, path: 'github', only: %w(create)
