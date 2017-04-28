@@ -1,0 +1,57 @@
+$triggers-index: (
+  columns: 3,
+  gutter: 0px,
+);
+
+$triggers-index--medium-up: (
+  columns: 5,
+  gutter: 0px,
+  media: $medium-screen,
+);
+
+.triggers {
+  &__triggers-index {
+    @include grid-collapse($triggers-index);
+    @include grid-container;
+    margin: $small-spacing 0;
+
+    &__headers {
+      display: none;
+
+      @include grid-media($triggers-index--medium-up) {
+        display: block;
+
+        .header {
+          @include grid-column(1);
+          font-weight: 600;
+          border-bottom: 1px solid shade($base-border-color, 25%);
+          padding: $small-spacing 0;
+        }
+      }
+    }
+
+    &__trigger {
+      .attribute {
+        .label {
+          @include grid_column(1, $triggers-index);
+          display: inline-block;
+          font-weight: 600;
+
+          @include grid-media($triggers-index--medium-up) {
+            display: none;
+          }
+        }
+
+        .value {
+          @include grid_column(2, $triggers-index);
+        }
+
+        @include grid-media($triggers-index--medium-up) {
+          @include grid-column(1);
+          border-bottom: $base-border;
+          padding: $small-spacing 0;
+        }
+      }
+    }
+  }
+}

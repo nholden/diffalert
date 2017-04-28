@@ -1,31 +1,40 @@
-.triggers__email
-  = current_user.email
+.triggers
+  .triggers__email
+    = current_user.email
 
-.triggers__github-events-secret
-  Your GitHub webhook secret is #{current_user.github_events_secret}
+  .triggers__github-events-secret
+    Your GitHub webhook secret is #{current_user.github_events_secret}
 
-.triggers__triggers
-  %table
-    %tr
-      %th Repository
-      %th Branch
-      %th File path
-      %th Last alert
-      %th
+  .triggers__triggers-index
+    .triggers__triggers-index__headers
+      .header Repository
+      .header Branch
+      .header File path
+      .header Last alert
+      .header Actions
+
     - current_user.triggers.each do |trigger|
-      %tr
-        %td= trigger.repository_name
-        %td= trigger.branch
-        %td= trigger.modified_file
-        %td
-          - if trigger.alerts.any?
-            #{time_ago_in_words(trigger.alerts.last.created_at)} ago
-          - else
-            Never
-        %td
-          = link_to 'Edit', edit_trigger_path(trigger)
-          |
-          = link_to 'Delete', trigger_path(trigger), method: :delete
+      .triggers__triggers-index__trigger
+        .attribute
+          .label Repository
+          .value= trigger.repository_name
+        .attribute
+          .label Branch
+          .value= trigger.branch
+        .attribute
+          .label File path
+          .value= trigger.modified_file
+        .attribute
+          .label Last alert
+          .value
+            - if trigger.alerts.any?
+              #{time_ago_in_words(trigger.alerts.last.created_at)} ago
+            - else
+              Never
+        .attribute
+          .label Actions
+          .value
+          #{link_to 'Edit', edit_trigger_path(trigger)} | #{link_to 'Delete', trigger_path(trigger), method: :delete}
 
-.triggers__new-trigger
-  = link_to 'Add trigger', new_trigger_path
+  .triggers__new-trigger
+    = link_to 'Add trigger', new_trigger_path
