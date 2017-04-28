@@ -3,10 +3,10 @@ $triggers-index: (
   gutter: 0px,
 );
 
-$triggers-index--medium-up: (
+$triggers-index--large-up: (
   columns: 5,
   gutter: 0px,
-  media: $medium-screen,
+  media: $large-screen,
 );
 
 .triggers {
@@ -18,7 +18,7 @@ $triggers-index--medium-up: (
     &__headers {
       display: none;
 
-      @include grid-media($triggers-index--medium-up) {
+      @include grid-media($triggers-index--large-up) {
         display: block;
 
         .header {
@@ -31,13 +31,21 @@ $triggers-index--medium-up: (
     }
 
     &__trigger {
+      border-bottom: $base-border;
+      padding: $small-spacing 0;
+
+      @include grid-media($triggers-index--large-up) {
+        border: 0;
+        padding: 0;
+      }
+
       .attribute {
         .label {
           @include grid_column(1, $triggers-index);
           display: inline-block;
           font-weight: 600;
 
-          @include grid-media($triggers-index--medium-up) {
+          @include grid-media($triggers-index--large-up) {
             display: none;
           }
         }
@@ -46,7 +54,7 @@ $triggers-index--medium-up: (
           @include grid_column(2, $triggers-index);
         }
 
-        @include grid-media($triggers-index--medium-up) {
+        @include grid-media($triggers-index--large-up) {
           @include grid-column(1);
           border-bottom: $base-border;
           padding: $small-spacing 0;
