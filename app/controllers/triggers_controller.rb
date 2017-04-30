@@ -8,7 +8,7 @@ class TriggersController < ApplicationController
   end
 
   def new
-    @trigger = Trigger.new
+    @trigger = Trigger.new(trigger_params)
   end
 
   def create

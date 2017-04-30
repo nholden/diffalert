@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :triggers, except: %w(show)
+  resources :trigger_builders, only: %w(new create)
   resource :session, only: %w(new create destroy)
 
   get '/signup', to: 'users#new', as: 'new_user'
