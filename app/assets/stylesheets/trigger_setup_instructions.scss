@@ -1,0 +1,21 @@
+.trigger-setup-instructions {
+  text-align: center;
+
+  &__instructions {
+    .attributes {
+      padding: $base-spacing 0;
+
+      .attribute {
+        padding: $small-spacing 0;
+
+        .label {
+          font-weight: $bold;
+        }
+
+        .value {
+          font-family: $monospace;
+        }
+      }
+    }
+  }
+}

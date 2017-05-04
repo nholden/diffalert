@@ -10,10 +10,14 @@ $triggers-index--large-up: (
 );
 
 .triggers {
+  &__header {
+    text-align: center;
+  }
+
   &__triggers-index {
     @include grid-collapse($triggers-index);
     @include grid-container;
-    margin: $small-spacing 0;
+    margin: $base-spacing 0;
 
     &__headers {
       display: none;
@@ -23,7 +27,7 @@ $triggers-index--large-up: (
 
         .header {
           @include grid-column(1);
-          font-weight: 600;
+          font-weight: $bold;
           border-bottom: 1px solid shade($base-border-color, 25%);
           padding: $small-spacing 0;
         }
@@ -43,7 +47,7 @@ $triggers-index--large-up: (
         .label {
           @include grid_column(1, $triggers-index);
           display: inline-block;
-          font-weight: 600;
+          font-weight: $bold;
 
           @include grid-media($triggers-index--large-up) {
             display: none;
@@ -61,5 +65,10 @@ $triggers-index--large-up: (
         }
       }
     }
+  }
+
+  &__new-trigger {
+    text-align: center;
+    font-weight: $bold;
   }
 }

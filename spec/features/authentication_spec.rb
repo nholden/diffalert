@@ -15,7 +15,6 @@ RSpec.describe "authentication" do
       Given(:password_confirmation) { 'password' }
 
       Then { expect(page).to have_content 'You’re signed up!' }
-      And { expect(page).to have_content "Your GitHub webhook secret is #{User.last.github_events_secret}" }
       And { User.last.email == 'nick@realhq.com' }
       And { User.last.github_events_secret.present? }
     end

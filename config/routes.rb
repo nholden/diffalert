@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new', as: 'new_user'
   post '/signup', to: 'users#create', as: 'users'
 
+  get '/setup', to: 'trigger_setup_instructions#show', as: 'trigger_setup_instructions'
+
 end

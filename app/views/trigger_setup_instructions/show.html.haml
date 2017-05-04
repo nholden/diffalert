@@ -1,0 +1,23 @@
+.trigger-setup-instructions
+  .trigger-setup-instructions__header
+    %h1 Configure your alerts in GitHub
+
+  .trigger-setup-instructions__instructions
+    Visit your repository&rsquo;s Settings page, click Webhooks, and add a new webhook with the following values.
+
+    .attributes
+      .attribute
+        .label Payload URL
+        .value= ENV.fetch('APP_HOST') + user_github_event_responses_path(current_user)
+
+      .attribute
+        .label Content type
+        .value application/json
+
+      .attribute
+        .label Secret
+        .value= current_user.github_events_secret
+
+      .attribute
+        .label Which events would you like to trigger this webhook?
+        .value Just the push event

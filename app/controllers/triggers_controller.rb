@@ -18,7 +18,7 @@ class TriggersController < ApplicationController
 
     if @trigger.save
       flash[:notice] = 'New trigger created!'
-      redirect_to triggers_path
+      redirect_to trigger_setup_instructions_path
     else
       render 'new'
     end

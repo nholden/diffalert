@@ -22,9 +22,11 @@ RSpec.describe "triggers" do
       When { click_button 'Save trigger' }
 
       Then { expect(page).to have_content 'New trigger created!' }
-      And { expect(page).to have_content 'sandbox' }
-      And { expect(page).to have_content 'master' }
-      And { expect(page).to have_content 'README.md' }
+      And { expect(page).to have_content 'Configure your alerts in GitHub' }
+      And { expect(page).to have_content "Payload URL http://diffalert.dev/users/#{user.id}/github" }
+      And { expect(page).to have_content 'Content type application/json' }
+      And { expect(page).to have_content "Secret #{user.github_events_secret}" }
+      And { expect(page).to have_content 'Which events would you like to trigger this webhook? Just the push event' }
 
       And { user.triggers.last.repository_name == 'sandbox' }
       And { user.triggers.last.branch == 'master' }
