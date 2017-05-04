@@ -1,9 +1,10 @@
 = form_for @user do |f|
 
   - if @user.errors.any?
-    %ul
-      - @user.errors.full_messages.each do |msg|
-        %li= msg.html_safe
+    .flash-error
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg.html_safe
 
   = f.label :email, 'Email'
   = f.email_field :email,
