@@ -1,9 +1,10 @@
 = form_for @trigger_builder do |f|
 
   - if f.object.errors.any?
-    %ul
-      - f.object.errors.full_messages.each do |msg|
-        %li= msg.html_safe
+    .flash-error
+      %ul
+        - f.object.errors.full_messages.each do |msg|
+          %li= msg.html_safe
 
   = f.label :github_url, 'Paste the GitHub link to the file you&rsquo;d like to monitor'.html_safe
   = f.url_field :github_url,

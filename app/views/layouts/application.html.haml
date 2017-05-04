@@ -13,6 +13,6 @@
 
       .content
         - flash.each do |name, msg|
-          = content_tag :div, msg.html_safe, class: name
+          = content_tag :div, msg.html_safe, class: "flash-#{name}"
 
         = yield

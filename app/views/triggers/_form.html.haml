@@ -1,7 +1,8 @@
 - if f.object.errors.any?
-  %ul
-    - f.object.errors.full_messages.each do |msg|
-      %li= msg.html_safe
+  .flash-error
+    %ul
+      - f.object.errors.full_messages.each do |msg|
+        %li= msg.html_safe
 
 = f.label :repository_name, 'Repository'
 = f.text_field :repository_name,
