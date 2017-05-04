@@ -15,7 +15,6 @@ RSpec.describe "authentication" do
       Given(:password_confirmation) { 'password' }
 
       Then { expect(page).to have_content 'You’re signed up!' }
-      And { expect(page).to have_content 'nick@realhq.com' }
       And { expect(page).to have_content "Your GitHub webhook secret is #{User.last.github_events_secret}" }
       And { User.last.email == 'nick@realhq.com' }
       And { User.last.github_events_secret.present? }
@@ -41,8 +40,7 @@ RSpec.describe "authentication" do
     context "with vaild credentials" do
       Given(:password) { 'letmein' }
 
-      Then { expect(page).to have_content 'Welcome back!' }
-      And { expect(page).to have_content 'nick@nickholden.io' }
+      Then { expect(page).to have_content 'Welcome back, nick@nickholden.io!' }
     end
 
     context "with invalid credentials" do

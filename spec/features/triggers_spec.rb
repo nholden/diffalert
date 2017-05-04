@@ -9,8 +9,6 @@ RSpec.describe "triggers" do
     When { log_in_as user }
     When { visit triggers_path }
 
-    Then { expect(page).to have_content user.email }
-
     describe "creating a new Trigger" do
       When { click_link 'Add trigger' }
 
