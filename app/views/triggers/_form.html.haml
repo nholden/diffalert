@@ -20,6 +20,10 @@
 = f.email_field :email,
   maxlength: 64
 
+= f.label :slack_webhook_url, 'Slack webhook URL'
+= f.url_field :slack_webhook_url,
+  maxlength: 128
+
 = f.label :message, 'Message'
 = f.text_area :message,
   maxlength: 256
