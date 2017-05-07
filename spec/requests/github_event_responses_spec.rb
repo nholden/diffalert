@@ -33,6 +33,10 @@ RSpec.describe "Github event responses" do
       Invariant { response.status == 200 }
 
       context "when trigger exists for modified file, branch, and repo" do
+        around(:each) do |example|
+          VCR.use_cassette('slack/message/send') { example.run }
+        end
+
         Given!(:trigger) { FactoryGirl.create(:trigger,
                                               user: user,
                                               modified_file: modified_file,

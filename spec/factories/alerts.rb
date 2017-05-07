@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :alert do
-    trigger_id 1
+    trigger
     email "test@gmail.com"
-    slack_webhook_url "https://hooks.slack.com/FOOBAR"
-    message "Check out this alert!"
+    slack_webhook_url "https://hooks.slack.com/services/FOO/BAR/FOOBAR"
+    message "Hello world!"
   end
 end

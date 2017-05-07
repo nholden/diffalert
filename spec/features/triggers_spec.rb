@@ -64,6 +64,10 @@ RSpec.describe "triggers" do
       Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
 
       context "when Trigger has an Alert" do
+        around(:each) do |example|
+          VCR.use_cassette('slack/message/send') { example.run }
+        end
+
         Given!(:alert) { FactoryGirl.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
 
         Then { expect(page).to have_content 'about 3 hours ago' }
