@@ -8,6 +8,7 @@ RSpec.describe "Github event responses" do
     Given(:modified_file) { "README.md" }
     Given(:branch) { "master" }
     Given(:repository_name) { "sandbox" }
+    Given(:alert) { user.alerts.last }
 
     Given(:request_params) {
       {
@@ -38,7 +39,10 @@ RSpec.describe "Github event responses" do
                                               branch: branch,
                                               repository_name: repository_name) }
 
-        Then { user.alerts.last.trigger == trigger }
+        Then { alert.trigger == trigger }
+        And { alert.email == trigger.email }
+        And { alert.slack_webhook_url == trigger.slack_webhook_url }
+        And { alert.message == trigger.message }
       end
 
       context "when trigger exists for modified file on different branch" do
@@ -48,7 +52,7 @@ RSpec.describe "Github event responses" do
                                               branch: "not-master",
                                               repository_name: repository_name) }
 
-        Then { user.alerts.empty? }
+        Then { !alert }
       end
 
       context "when trigger exists for modified file on different repo" do
@@ -58,11 +62,11 @@ RSpec.describe "Github event responses" do
                                               branch: branch,
                                               repository_name: "not-sandbox") }
 
-        Then { user.alerts.empty? }
+        Then { !alert }
       end
 
       context "when no trigger exists for modified file" do
-        Then { user.alerts.empty? }
+        Then { !alert }
       end
     end
 

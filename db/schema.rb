@@ -10,15 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170507192156) do
+ActiveRecord::Schema.define(version: 20170507200839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "alerts", force: :cascade do |t|
     t.integer  "trigger_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "email"
+    t.string   "slack_webhook_url"
+    t.text     "message"
     t.index ["trigger_id"], name: "index_alerts_on_trigger_id", using: :btree
   end
 
