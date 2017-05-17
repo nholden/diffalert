@@ -1,6 +1,6 @@
 class AlertMailer < ApplicationMailer
 
-  default from: "\"DiffAlert\" <alerts@diffalert.nickholden.io>"
+  default from: ENV.fetch('DEFAULT_SEND_FROM')
 
   def modified_file_email(alert)
     @alert = alert
