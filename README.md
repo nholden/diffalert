@@ -2,6 +2,10 @@
 
 Get email or Slack alerts when specific files in your GitHub repositories change
 
+## Screenshot
+
+<img width="1200" alt="screen shot 2017-05-18 at 6 41 08 am" src="https://cloud.githubusercontent.com/assets/7942714/26205264/1292ed12-3b96-11e7-9b6c-4657511ca06e.png">
+
 ## Demo
 
 Try it out for yourself at [http://diffalert.nickholden.io](http://diffalert.nickholden.io).
