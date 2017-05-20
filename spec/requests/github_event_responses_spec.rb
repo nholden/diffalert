@@ -43,10 +43,31 @@ RSpec.describe "Github event responses" do
                                               branch: branch,
                                               repository_name: repository_name) }
 
-        Then { alert.trigger == trigger }
-        And { alert.email == trigger.email }
-        And { alert.slack_webhook_url == trigger.slack_webhook_url }
-        And { alert.message == trigger.message }
+        context "when the push is a single commit" do
+          Then { alert.trigger == trigger }
+          And { alert.email == trigger.email }
+          And { alert.slack_webhook_url == trigger.slack_webhook_url }
+          And { alert.message == trigger.message }
+        end
+
+        context "when the push is a pull request merge" do
+          Given { request_params[:head_commit] = { message: 'Merge pull request #42 from nholden/my-feature\n\nMy feature' } }
+
+          context "when the merge commit modifies the file" do
+            Given { request_params[:head_commit][:modified] = [modified_file] }
+
+            Then { alert.trigger == trigger }
+            And { alert.email == trigger.email }
+            And { alert.slack_webhook_url == trigger.slack_webhook_url }
+            And { alert.message == trigger.message }
+          end
+
+          context "when the merge commit does not modify the file" do
+            Given { request_params[:head_commit][:modified] = [] }
+
+            Then { !alert }
+          end
+        end
       end
 
       context "when trigger exists for modified file on different branch" do

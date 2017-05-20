@@ -25,7 +25,18 @@ RSpec.describe Github::PushEvent do
   }
 
   describe "#modified_files" do
-    Then { expect(push_event.modified_files).to match_array(['README.md', 'todo.txt']) }
+    context "when push is not a pull request merge it looks at all commits" do
+      Then { expect(push_event.modified_files).to match_array(['README.md', 'todo.txt']) }
+    end
+
+    context "when push is a pull request merge it only looks at merge commit" do
+      Given { payload_hash[:head_commit] = {
+        message: 'Merge pull request #42 from nholden/my-feature\n\nMy feature',
+        modified: ['README.md'],
+      } }
+
+      Then { expect(push_event.modified_files).to match_array(['README.md']) }
+    end
   end
 
   describe "#branch" do
