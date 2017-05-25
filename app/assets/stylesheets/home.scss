@@ -1,0 +1,37 @@
+.home {
+  &__header {
+    text-align: center;
+    height: 100%;
+    margin-left: -($base-spacing * 2);
+    margin-right: -($base-spacing * 2);
+    padding-top: $base-spacing * 6;
+    padding-bottom: $base-spacing * 6;
+    background-image: image-url("home_header_background.jpg");
+    background-size: cover;
+    background-position: top;
+
+    &__content {
+      margin: 0 auto;
+      padding: $base-spacing;
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.6);
+
+      .headline {
+        display: inline-block;
+        font-size: 200%;
+        font-weight: 500;
+        margin-bottom: $small-spacing;
+      }
+
+      .cta {
+        display: inline-block;
+        font-size: 150%;
+        margin: 0 auto;
+        padding: $small-spacing/2 $small-spacing;
+        border-radius: $small-spacing/3;
+        background-color: #8ece4e;
+        color: #fff;
+      }
+    }
+  }
+}

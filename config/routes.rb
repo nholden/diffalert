@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'sessions#new'
+  root to: 'home#show'
 
   resources :users, only: %w() do
     resources :github_event_responses, path: 'github', only: %w(create)
