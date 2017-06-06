@@ -3,3 +3,6 @@
     .home__header__content
       .headline Custom email and Slack alerts for your GitHub repositories
       .cta-container= link_to 'Get started for free', new_user_path, class: 'cta'
+  .home__footer
+    .home__footer__content
+      #{link_to 'About', 'http://nickholden.io', target: '_blank'} | #{mail_to 'diffalert@nickholden.io', 'Contact'}

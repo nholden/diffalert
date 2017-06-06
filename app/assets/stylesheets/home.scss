@@ -1,20 +1,24 @@
 .home {
-  &__header {
+  &__header, &__footer {
     text-align: center;
     height: 100%;
-    margin-left: -($base-spacing * 2);
-    margin-right: -($base-spacing * 2);
-    padding-top: $base-spacing * 6;
-    padding-bottom: $base-spacing * 6;
-    background-image: image-url("home_header_background.jpg");
-    background-size: cover;
-    background-position: top;
+    margin: 0 -20px;
 
     &__content {
       margin: 0 auto;
       padding: $base-spacing;
-      color: #fff;
+    }
+  }
+
+  &__header {
+    background-image: image-url("home_header_background.jpg");
+    background-size: cover;
+    background-position: top;
+    padding: ($base-spacing * 6) 0;
+
+    &__content {
       background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
 
       .headline {
         display: inline-block;
@@ -29,9 +33,20 @@
         margin: 0 auto;
         padding: $small-spacing/2 $small-spacing;
         border-radius: $small-spacing/3;
-        background-color: #8ece4e;
+        background-color: $green;
         color: #fff;
       }
+    }
+  }
+
+  &__footer {
+    margin-top: 2em;
+    padding: $base-spacing 0;
+    background-color: $dark-gray;
+    color: $medium-gray;
+
+    a {
+      color: #fff;
     }
   }
 }
