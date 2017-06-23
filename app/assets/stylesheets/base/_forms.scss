@@ -1,3 +1,31 @@
+@mixin form-container($width) {
+  max-width: $width;
+  margin: 0 auto;
+  padding-top: $small-spacing;
+
+  .button-container {
+    input {
+      width: 100%;
+      font-size: 150%;
+      padding: $small-spacing;
+      margin: $small-spacing 0;
+    }
+  }
+
+  .field_with_errors {
+    input, textarea {
+      border-color: $red;
+    }
+  }
+
+  .error-message {
+    margin-top: -$small-spacing;
+    margin-bottom: $small-spacing;
+    font-size: 85%;
+    color: $red;
+  }
+}
+
 fieldset {
   background-color: transparent;
   border: 0;

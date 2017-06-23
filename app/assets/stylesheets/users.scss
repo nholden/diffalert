@@ -4,30 +4,6 @@
   }
 
   &__form-container {
-    max-width: $medium-screen/2;
-    margin: 0 auto;
-    padding-top: $small-spacing;
-
-    .button-container {
-      input {
-        width: 100%;
-        font-size: 150%;
-        padding: $small-spacing;
-        margin: $small-spacing 0;
-      }
-    }
-
-    .field_with_errors {
-      input {
-        border-color: $red;
-      }
-    }
-
-    .error-message {
-      margin-top: -$small-spacing;
-      margin-bottom: $small-spacing;
-      font-size: 85%;
-      color: $red;
-    }
+    @include form-container($medium-screen/2);
   }
 }

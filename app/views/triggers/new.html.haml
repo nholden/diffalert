@@ -1,2 +1,7 @@
-= form_for @trigger do |f|
-  - render partial: 'form', locals: { f: f }
+.triggers
+  .triggers__header
+    %h1 Create a new trigger
+
+  .triggers__form-container
+    = form_for @trigger do |f|
+      - render partial: 'form', locals: { f: f }

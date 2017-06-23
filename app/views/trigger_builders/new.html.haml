@@ -1,13 +1,14 @@
-= form_for @trigger_builder do |f|
+.triggers
+  .triggers__header
+    %h1 Create a new trigger
 
-  - if f.object.errors.any?
-    .flash-error
-      %ul
-        - f.object.errors.full_messages.each do |msg|
-          %li= msg.html_safe
+  .triggers__form-container
+    = form_for @trigger_builder do |f|
 
-  = f.label :github_url, 'Paste the GitHub link to the file you&rsquo;d like to monitor'.html_safe
-  = f.url_field :github_url,
-    maxlength: 128
+      = f.label :github_url, 'Paste the GitHub link to the file you&rsquo;d like to monitor'.html_safe
+      = f.url_field :github_url,
+        maxlength: 128
+      = f.error_messages :github_url
 
-  = f.submit 'Next'
+      .button-container
+        = f.submit 'Next'

@@ -16,7 +16,8 @@ class Trigger < ApplicationRecord
 
   def must_have_email_or_slack_webhook_url
     if email.blank? && slack_webhook_url.blank?
-      errors[:base] << 'A trigger must have an email and/or a Slack webhook URL'
+      errors[:email] << 'can\'t be blank without a Slack webhook URL'
+      errors[:slack_webhook_url] << 'can\'t be blank without an email'
     end
   end
 

@@ -1,31 +1,32 @@
-- if f.object.errors.any?
-  .flash-error
-    %ul
-      - f.object.errors.full_messages.each do |msg|
-        %li= msg.html_safe
-
 = f.label :repository_name, 'Repository'
 = f.text_field :repository_name,
   maxlength: 64
+= f.error_messages :repository_name
 
 = f.label :branch, 'Branch'
 = f.text_field :branch,
   maxlength: 64
+= f.error_messages :branch
 
 = f.label :modified_file, 'File path'
 = f.text_field :modified_file,
   maxlength: 64
+= f.error_messages :modified_file
 
 = f.label :email, 'Email'
 = f.email_field :email,
   maxlength: 64
+= f.error_messages :email
 
 = f.label :slack_webhook_url, 'Slack webhook URL'
 = f.url_field :slack_webhook_url,
   maxlength: 128
+= f.error_messages :slack_webhook_url
 
 = f.label :message, 'Message'
 = f.text_area :message,
   maxlength: 256
+= f.error_messages :message
 
-= f.submit 'Save trigger'
+.button-container
+  = f.submit 'Save trigger'

@@ -71,4 +71,8 @@ $triggers-index--large-up: (
     text-align: center;
     font-weight: $bold;
   }
+
+  &__form-container {
+    @include form-container($medium-screen);
+  }
 }
