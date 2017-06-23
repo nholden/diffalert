@@ -1,8 +1,1 @@
 en:
-  activerecord:
-    errors:
-      models:
-        user:
-          attributes:
-            password_confirmation:
-              confirmation: 'Passwords don’t match'

@@ -23,7 +23,7 @@ RSpec.describe "authentication" do
       Given(:password) { 'password' }
       Given(:password_confirmation) { 'passsword' }
 
-      Then { expect(page).to have_content 'Passwords don’t match' }
+      Then { expect(page).to have_content 'This field doesn\'t match Password.' }
       And { User.where(email: 'nick@realhq.com').empty? }
     end
   end

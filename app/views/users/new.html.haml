@@ -7,23 +7,20 @@
   .users__form-container
     = form_for @user do |f|
 
-      - if @user.errors.any?
-        .flash-error
-          %ul
-            - @user.errors.full_messages.each do |msg|
-              %li= msg.html_safe
-
       = f.label :email, 'Email'
       = f.email_field :email,
         maxlength: 64
+      = f.error_messages :email
 
       = f.label :password, 'Password'
       = f.password_field :password,
         maxlength: 64
+      = f.error_messages :password
 
       = f.label :password_confirmation, 'Confirm password'
       = f.password_field :password_confirmation,
         maxlength: 64
+      = f.error_messages :password_confirmation
 
       .button-container
         = f.submit 'Sign up'
