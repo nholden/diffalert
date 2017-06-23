@@ -1,21 +1,29 @@
-= form_for @user do |f|
+.users
+  .users__header
+    %h1 Create your account
+    %p
+      You&rsquo;re minutes away from your first alert! Let&rsquo;s create your account.
 
-  - if @user.errors.any?
-    .flash-error
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg.html_safe
+  .users__form-container
+    = form_for @user do |f|
 
-  = f.label :email, 'Email'
-  = f.email_field :email,
-    maxlength: 64
+      - if @user.errors.any?
+        .flash-error
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg.html_safe
 
-  = f.label :password, 'Password'
-  = f.password_field :password,
-    maxlength: 64
+      = f.label :email, 'Email'
+      = f.email_field :email,
+        maxlength: 64
 
-  = f.label :password_confirmation, 'Confirm password'
-  = f.password_field :password_confirmation,
-    maxlength: 64
+      = f.label :password, 'Password'
+      = f.password_field :password,
+        maxlength: 64
 
-  = f.submit 'Sign up'
+      = f.label :password_confirmation, 'Confirm password'
+      = f.password_field :password_confirmation,
+        maxlength: 64
+
+      .button-container
+        = f.submit 'Sign up'

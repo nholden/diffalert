@@ -1,0 +1,20 @@
+.users {
+  &__header {
+    text-align: center;
+  }
+
+  &__form-container {
+    max-width: $medium-screen/2;
+    margin: 0 auto;
+    padding-top: $small-spacing;
+
+    .button-container {
+      input {
+        width: 100%;
+        font-size: 150%;
+        padding: $small-spacing;
+        margin: $small-spacing 0;
+      }
+    }
+  }
+}

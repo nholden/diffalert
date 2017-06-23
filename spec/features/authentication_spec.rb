@@ -28,13 +28,13 @@ RSpec.describe "authentication" do
     end
   end
 
-  describe "login" do
+  describe "log in" do
     Given { FactoryGirl.create(:user, email: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
 
     When { visit new_session_path }
     When { fill_in 'Email', with: 'nick@nickholden.io' }
     When { fill_in 'Password', with: password }
-    When { click_button 'Login' }
+    When { click_button 'Log in' }
 
     context "with vaild credentials" do
       Given(:password) { 'letmein' }
