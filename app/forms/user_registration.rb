@@ -22,12 +22,8 @@ class UserRegistration
   validate :email_must_be_available
 
   def save!
-    @user = User.create! do |user|
-      user.email = email
-      user.password = password
-      user.password_confirmation = password_confirmation
-      user.github_events_secret = SecureRandom.hex(20)
-    end
+    create_user!
+    send_confirmation_email
   end
 
   private
@@ -36,6 +32,19 @@ class UserRegistration
     if User.where('lower(email) = ?', email.downcase).any?
       errors[:email] << 'cannot be taken'
     end
+  end
+
+  def create_user!
+    @user = User.create! do |user|
+      user.email = email
+      user.password = password
+      user.password_confirmation = password_confirmation
+      user.github_events_secret = SecureRandom.hex(20)
+    end
+  end
+
+  def send_confirmation_email
+    UserConfirmationEmailWorker.perform_async(user.id)
   end
 
 end

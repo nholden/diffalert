@@ -6,4 +6,3 @@ Rails.application.config.action_mailer.smtp_settings = {
   :user_name => ENV['MAILGUN_SMTP_LOGIN'],
   :password => ENV['MAILGUN_SMTP_PASSWORD']
 }
-

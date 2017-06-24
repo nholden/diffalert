@@ -19,6 +19,7 @@ gem 'rollbar'
 gem 'excon'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'premailer'
 
 group :development, :test do
   gem 'pry'
