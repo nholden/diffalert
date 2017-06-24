@@ -24,7 +24,7 @@ RSpec.describe "triggers" do
 
       Then { expect(page).to have_content 'New trigger created!' }
       And { expect(page).to have_content 'Configure your alerts in GitHub' }
-      And { expect(page).to have_content "Payload URL #{ENV.fetch('APP_HOST')}/users/#{user.id}/github" }
+      And { expect(page).to have_content "Payload URL http://www.example.com/users/#{user.id}/github" }
       And { expect(page).to have_content 'Content type application/json' }
       And { expect(page).to have_content "Secret #{user.github_events_secret}" }
       And { expect(page).to have_content 'Which events would you like to trigger this webhook? Just the push event' }

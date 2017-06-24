@@ -20,6 +20,7 @@ gem 'excon'
 gem 'sidekiq'
 gem 'sinatra'
 gem 'premailer'
+gem 'draper'
 
 group :development, :test do
   gem 'pry'

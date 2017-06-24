@@ -8,7 +8,7 @@
     .attributes
       .attribute
         .label Payload URL
-        .value= ENV.fetch('APP_HOST') + user_github_event_responses_path(current_user)
+        .value= current_user.github_event_payload_url
 
       .attribute
         .label Content type
