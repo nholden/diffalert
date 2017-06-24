@@ -15,7 +15,7 @@ Try it out for yourself at [http://diffalert.nickholden.io](http://diffalert.nic
 ```
 git clone git://github.com/nholden/diffalert
 cd diffalert
-brew install redis postgresql
+brew install redis postgresql heroku
 bundle install
 bundle exec rake db:reset
 cp .env.example .env
@@ -24,7 +24,7 @@ cp .env.example .env
 ## Getting started
 
 ```
-rails s
+heroku local
 ```
 
 Navigate to http://localhost:5081 (or whichever port you choose in `.env`), click "sign up," and create an account. Click "add trigger," and follow the prompts to begin receiving alerts on any file in a GitHub repository for which you have access to manage webhooks.
