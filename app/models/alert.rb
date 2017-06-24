@@ -7,7 +7,7 @@ class Alert < ApplicationRecord
   private
 
   def process
-    AlertProcessor.new(self).process
+    AlertWorker.perform_async(id)
   end
 
 end
