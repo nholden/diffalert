@@ -14,9 +14,9 @@ module Slack
       if Rails.env.test?
         SlackInterceptor.messages << self
       else
-        Rails.logger.info "[Slack::Message] Sending \"#{@content}\" to #{@webhook_url}"
-        Excon.post(@webhook_url,
-                   body: { text: @content }.to_json,
+        Rails.logger.info "[Slack::Message] Sending \"#{content}\" to #{webhook_url}"
+        Excon.post(webhook_url,
+                   body: { text: content }.to_json,
                    headers: { 'Content-Type' => 'application/json' })
       end
     end
