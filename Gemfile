@@ -17,6 +17,8 @@ gem 'bourbon', '5.0.0.beta.7'
 gem 'neat'
 gem 'rollbar'
 gem 'excon'
+gem 'sidekiq'
+gem 'sinatra'
 
 group :development, :test do
   gem 'pry'
