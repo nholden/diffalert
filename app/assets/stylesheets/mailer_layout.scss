@@ -1,0 +1,43 @@
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+.container {
+  .header {
+    padding: 0 $small-spacing $small-spacing;
+    padding-bottom: $small-spacing;
+
+    .logo {
+      font-size: 2em;
+      line-height: 2.5em;
+
+      .icon, .wordmark {
+        display: inline-block;
+      }
+    }
+  }
+
+  .content {
+    width: calc(100% - $small-spacing);
+    padding: 0 $small-spacing;
+
+    .cta-container {
+      width: 100%;
+      margin: 0 auto;
+      padding: $base-spacing 0;
+      text-align: center;
+
+      .cta {
+        display: inline-block;
+        font-size: 150%;
+        margin: 0 auto;
+        padding: $small-spacing/2 $small-spacing;
+        border-radius: $base-border-radius;
+        background-color: $green;
+        color: #fff;
+      }
+    }
+  }
+}

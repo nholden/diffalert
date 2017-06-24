@@ -1,0 +1,14 @@
+!!!
+%html
+  %head
+    %meta{ 'http-equiv' => 'Content-Type', content: 'text/html; charset=utf-8' }
+    = stylesheet_link_tag 'mailer'
+
+  %body
+    .container
+      .header
+        .logo
+          .icon= link_to "&#128680;".html_safe, root_url
+          .wordmark= link_to "DiffAlert", root_url
+      .content
+        = yield

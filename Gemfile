@@ -19,7 +19,8 @@ gem 'rollbar'
 gem 'excon'
 gem 'sidekiq'
 gem 'sinatra'
-gem 'premailer'
+gem 'premailer-rails'
+gem 'nokogiri'
 gem 'draper'
 
 group :development, :test do
