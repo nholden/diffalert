@@ -6,7 +6,7 @@ RSpec.describe "user email confirmation" do
 
   Given(:user) { FactoryGirl.create(:user, email: 'test@email.com', email_confirmed_at: email_confirmed_at) }
 
-  When { visit user_email_confirmation_path(user_id: user.id, token: token_param) }
+  When { visit new_user_email_confirmation_path(user_id: user.id, token: token_param) }
   When { user.reload }
 
   context "when token is valid" do

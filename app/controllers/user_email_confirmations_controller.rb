@@ -1,6 +1,6 @@
 class UserEmailConfirmationsController < ApplicationController
 
-  def show
+  def new
     user = User.find(params[:user_id])
 
     if user.email_confirmation_token == params[:token]

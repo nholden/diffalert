@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :users, only: %w() do
     resources :github_event_responses, path: 'github', only: %w(create)
-    resource :email_confirmation, only: %w(show), controller: 'user_email_confirmations'
+    resource :email_confirmation, only: %w(new), controller: 'user_email_confirmations'
   end
 
   resources :triggers, except: %w(show)
