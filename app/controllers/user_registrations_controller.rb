@@ -10,7 +10,7 @@ class UserRegistrationsController < ApplicationController
     if @user_registration.valid?
       @user_registration.save!
       log_in @user_registration.user
-      flash[:notice] = 'You&rsquo;re signed up!'
+      flash[:notice] = "You&rsquo;re signed up! Check #{@user_registration.email} in a moment for a confirmation link."
       redirect_to triggers_path
     else
       render 'new'

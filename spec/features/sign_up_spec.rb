@@ -19,6 +19,7 @@ RSpec.describe "sign up" do
     And { user.email == 'nick@realhq.com' }
     And { user.github_events_secret.present? }
     And { user.email_confirmed_at.nil? }
+    And { user.email_confirmation_token.present? }
     And { UserConfirmationEmailWorker.jobs.one? }
   end
 

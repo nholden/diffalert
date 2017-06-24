@@ -5,6 +5,7 @@ RSpec.describe UserConfirmationEmailWorker do
 
   Given(:user) { FactoryGirl.create(:user, email: 'new@user.com') }
   Given(:email) { ActionMailer::Base.deliveries.last }
+  Given(:email_body) { convert_to_text(email.body.to_s) }
   Given { ActionMailer::Base.deliveries.clear }
 
   describe "perform" do
@@ -13,7 +14,8 @@ RSpec.describe UserConfirmationEmailWorker do
     Then { ActionMailer::Base.deliveries.one? }
     And { expect(email.to).to match_array(['new@user.com']) }
     And { email.subject == 'Confirm your email address' }
-    And { convert_to_text(email.body.to_s) =~ /You’re signed up for DiffAlert!/ }
+    And { email_body =~ /You’re signed up for DiffAlert!/ }
+    And { email_body =~ /Confirm your email address/ }
   end
 
 end

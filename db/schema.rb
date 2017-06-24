@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170624135650) do
+ActiveRecord::Schema.define(version: 20170624161028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,10 @@ ActiveRecord::Schema.define(version: 20170624135650) do
     t.string "email"
     t.string "password_digest"
     t.datetime "email_confirmed_at"
+    t.string "email_confirmation_token"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["email_confirmation_token"], name: "index_users_on_email_confirmation_token", unique: true
+    t.index ["github_events_secret"], name: "index_users_on_github_events_secret", unique: true
   end
 
 end

@@ -11,7 +11,15 @@ class User < ApplicationRecord
     uniqueness: { case_sensitive: false }
 
   validates :password,
-    presence: true,
-    length: { minimum: 6 }
+    length: { minimum: 6 },
+    allow_nil: true
+
+  def email_confirmed?
+    email_confirmed_at.present?
+  end
+
+  def confirm_email!
+    update! email_confirmed_at: Time.current
+  end
 
 end
