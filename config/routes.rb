@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   resources :trigger_builders, only: %w(new create)
   resource :session, only: %w(new create destroy)
 
-  get '/signup', to: 'users#new', as: 'new_user'
-  post '/signup', to: 'users#create', as: 'users'
+  get '/signup', to: 'user_registrations#new', as: 'new_user_registration'
+  post '/signup', to: 'user_registrations#create', as: 'user_registrations'
 
   get '/setup', to: 'trigger_setup_instructions#show', as: 'trigger_setup_instructions'
 
