@@ -1,5 +1,4 @@
 require 'rails_helper'
-include Premailer::HtmlToPlainText
 
 RSpec.describe UserConfirmationEmailWorker do
 
