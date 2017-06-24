@@ -10,12 +10,11 @@ class UserEmailConfirmationsController < ApplicationController
         user.confirm_email!
         flash[:notice] = "Thank you! You have confirmed #{user.email}."
       end
-
-      redirect_to new_session_path
     else
       flash[:alert] = "Invalid URL"
-      redirect_to root_path
     end
+
+    redirect_to root_path
   end
 
 end

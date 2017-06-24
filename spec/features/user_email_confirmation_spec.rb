@@ -16,7 +16,7 @@ RSpec.describe "user email confirmation" do
       Given(:email_confirmed_at) { nil }
 
       Then { expect(page).to have_text 'Thank you! You have confirmed test@email.com.' }
-      And { expect(page).to have_current_path new_session_path }
+      And { expect(page).to have_current_path root_path }
       And { user.email_confirmed? }
       And { user.email_confirmed_at == Time.current }
     end
@@ -25,7 +25,7 @@ RSpec.describe "user email confirmation" do
       Given(:email_confirmed_at) { 1.year.ago }
 
       Then { expect(page).to have_text 'You have already confirmed test@email.com' }
-      And { expect(page).to have_current_path new_session_path }
+      And { expect(page).to have_current_path root_path }
       And { user.email_confirmed? }
       And { user.email_confirmed_at == 1.year.ago }
     end
