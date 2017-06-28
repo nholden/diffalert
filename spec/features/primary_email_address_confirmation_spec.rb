@@ -4,7 +4,7 @@ RSpec.describe "primary email address confirmation" do
 
   around { |example| travel_to(Time.iso8601('2017-06-01T12:00:00-07:00'), &example) }
 
-  Given(:email_address) { FactoryGirl.create(:email_address, address: 'test@email.com', confirmed_at: confirmed_at) }
+  Given(:email_address) { FactoryGirl.create(:email_address, :primary, address: 'test@email.com', confirmed_at: confirmed_at) }
   Given { PrimaryEmailAddressConfirmationWorker.jobs.clear }
 
   describe "following an email confirmation link" do

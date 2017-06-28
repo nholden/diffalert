@@ -2,6 +2,7 @@ class EmailAddress < ApplicationRecord
 
   ADDRESS_TYPES = [
     PRIMARY_TYPE = 'primary',
+    ALERT_TYPE = 'alert',
   ]
 
   belongs_to :user

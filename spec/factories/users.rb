@@ -1,13 +1,13 @@
 FactoryGirl.define do
   factory :user do
-    github_events_secret "s3cr3t"
     password "password"
     password_confirmation "password"
     sequence :username { |n| "factory-email-#{n}@gmail.com" }
+    sequence :github_events_secret { |n| "s3cr3t-#{n}" }
 
-    after(:create) do |user, evaluator|
+    after(:build) do |user, evaluator|
       if user.primary_email_address.nil?
-        create(:email_address, :primary, user: user)
+        user.primary_email_address = build(:email_address, :primary, user: user)
       end
     end
   end
