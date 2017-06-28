@@ -4,7 +4,7 @@ require 'support/authentication_helper'
 RSpec.describe "authentication" do
 
   describe "log in" do
-    Given { FactoryGirl.create(:user, email: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
+    Given { FactoryGirl.create(:user, username: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
 
     When { visit new_session_path }
     When { fill_in 'Email', with: 'nick@nickholden.io' }

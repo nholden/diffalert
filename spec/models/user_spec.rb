@@ -5,27 +5,27 @@ RSpec.describe User, type: :model do
   describe "validations" do
     Given(:user) { User.new(FactoryGirl.attributes_for(:user)) }
 
-    context "email" do
-      When { user.email = email }
+    context "username" do
+      When { user.username = username }
 
-      context "it is valid when email is valid" do
-        Given(:email) { 'dustin@firsttraxcoffee.com' }
+      context "it is valid when username is valid" do
+        Given(:username) { 'dustin@firsttraxcoffee.com' }
         Then { user.valid? }
       end
 
-      context "it is invalid when email is invalid" do
-        Given(:email) { 'dustin@firsttraxcoffee' }
+      context "it is invalid when username is invalid" do
+        Given(:username) { 'dustin@firsttraxcoffee' }
         Then { !user.valid? }
       end
 
-      context "it is invalid when email is blank" do
-        Given(:email) { ' ' }
+      context "it is invalid when username is blank" do
+        Given(:username) { ' ' }
         Then { !user.valid? }
       end
 
-      context "it is invalid when another user with that email exists" do
-        Given { FactoryGirl.create(:user, email: 'dustin@firsttraxcoffee.com') }
-        Given(:email) { 'Dustin@firsttraxcoffee.com' }
+      context "it is invalid when another user with that username exists" do
+        Given { FactoryGirl.create(:user, username: 'dustin@firsttraxcoffee.com') }
+        Given(:username) { 'Dustin@firsttraxcoffee.com' }
 
         Then { !user.valid? }
       end

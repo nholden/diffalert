@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "sign up" do
 
-  Given { UserConfirmationEmailWorker.jobs.clear }
+  Given { PrimaryEmailAddressConfirmationWorker.jobs.clear }
 
   When { visit new_user_registration_path }
   When { fill_in 'Email', with: 'nick@realhq.com' }
@@ -12,15 +12,17 @@ RSpec.describe "sign up" do
 
   context "with matching passwords" do
     Given(:user) { User.last! }
+    Given(:primary_email_address) { user.primary_email_address }
     Given(:password) { 'password' }
     Given(:password_confirmation) { 'password' }
 
     Then { expect(page).to have_content 'You’re signed up!' }
-    And { user.email == 'nick@realhq.com' }
+    And { user.username == 'nick@realhq.com' }
     And { user.github_events_secret.present? }
-    And { user.email_confirmed_at.nil? }
-    And { user.email_confirmation_token.present? }
-    And { UserConfirmationEmailWorker.jobs.one? }
+    And { primary_email_address.address == 'nick@realhq.com' }
+    And { primary_email_address.confirmed_at.nil? }
+    And { primary_email_address.confirmation_token.present? }
+    And { PrimaryEmailAddressConfirmationWorker.jobs.one? }
   end
 
   context "without matching passwords" do
@@ -28,8 +30,8 @@ RSpec.describe "sign up" do
     Given(:password_confirmation) { 'passsword' }
 
     Then { expect(page).to have_content 'This field doesn\'t match Password.' }
-    And { User.where(email: 'nick@realhq.com').empty? }
-    And { UserConfirmationEmailWorker.jobs.none? }
+    And { User.where(username: 'nick@realhq.com').empty? }
+    And { PrimaryEmailAddressConfirmationWorker.jobs.none? }
   end
 
 end

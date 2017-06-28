@@ -10,7 +10,7 @@ class UserRegistrationsController < ApplicationController
     if @user_registration.valid?
       @user_registration.save!
       log_in @user_registration.user
-      flash[:notice] = "You&rsquo;re signed up! Check #{@user_registration.email} in a moment for a confirmation link."
+      flash[:notice] = "You&rsquo;re signed up! Check #{@user_registration.username} in a moment for a confirmation link."
       redirect_to triggers_path
     else
       render 'new'
@@ -20,7 +20,7 @@ class UserRegistrationsController < ApplicationController
   private
 
   def user_registration_params
-    params.require(:user_registration).permit(:email, :password, :password_confirmation)
+    params.require(:user_registration).permit(:username, :password, :password_confirmation)
   end
 
 end

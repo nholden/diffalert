@@ -82,7 +82,7 @@ RSpec.describe "triggers" do
   context "not authenticated" do
     When { visit triggers_path }
 
-    Then { expect(page).to_not have_content user.email }
+    Then { expect(page).to_not have_content user.username }
     And { expect(page).to have_content 'You must be logged in to view that page' }
   end
 

@@ -1,7 +1,7 @@
-- unless current_user.email_confirmed?
+- unless current_user.primary_email_address.confirmed?
   .flash-alert
     You haven&rsquo;t confirmed your email address. Please click the link in the email we sent you,
-    or #{link_to 'click here', new_user_confirmation_email_resend_path(current_user)} to resend the email.
+    or #{link_to 'click here', new_email_address_confirmation_resend_path(current_user.primary_email_address)} to resend the email.
 
 .triggers
   .triggers__header

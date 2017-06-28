@@ -4,6 +4,10 @@ FactoryGirl.define do
     email_confirmation_token "t0k3n"
     password "password"
     password_confirmation "password"
-    sequence :email { |n| "factory-email-#{n}@gmail.com" }
+    sequence :username { |n| "factory-email-#{n}@gmail.com" }
+
+    after(:build) do |user|
+      FactoryGirl.create(:email_address, :primary, user: user)
+    end
   end
 end

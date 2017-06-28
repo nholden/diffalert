@@ -6,32 +6,32 @@ RSpec.describe UserRegistration, type: :model do
     Given(:user_registration) { UserRegistration.new(default_attrs) }
 
     Given(:default_attrs) { {
-      email: 'nick@diffalert.org',
+      username: 'nick@diffalert.org',
       password: 'passw0rd',
       password_confirmation: 'passw0rd',
     } }
 
-    context "email" do
-      When { user_registration.email = email }
+    context "username" do
+      When { user_registration.username = username }
 
-      context "it is valid when email is valid" do
-        Given(:email) { 'dustin@firsttraxcoffee.com' }
+      context "it is valid when username is valid" do
+        Given(:username ) { 'dustin@firsttraxcoffee.com' }
         Then { user_registration.valid? }
       end
 
-      context "it is invalid when email is invalid" do
-        Given(:email) { 'dustin@firsttraxcoffee' }
+      context "it is invalid when username is invalid" do
+        Given(:username ) { 'dustin@firsttraxcoffee' }
         Then { !user_registration.valid? }
       end
 
-      context "it is invalid when email is blank" do
-        Given(:email) { ' ' }
+      context "it is invalid when username is blank" do
+        Given(:username ) { ' ' }
         Then { !user_registration.valid? }
       end
 
-      context "it is invalid when a user with that email exists" do
-        Given { FactoryGirl.create(:user, email: 'dustin@firsttraxcoffee.com') }
-        Given(:email) { 'Dustin@firsttraxcoffee.com' }
+      context "it is invalid when a user with that username exists" do
+        Given { FactoryGirl.create(:user, username: 'dustin@firsttraxcoffee.com') }
+        Given(:username) { 'Dustin@firsttraxcoffee.com' }
 
         Then { !user_registration.valid? }
       end

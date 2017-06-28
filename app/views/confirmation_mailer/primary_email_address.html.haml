@@ -1,0 +1,10 @@
+%h1
+  Thanks! Just one more thing...
+
+%p
+  Thanks for signing up for DiffAlert! Please #{link_to 'confirm your email address', @email_address.confirmation_url} so that we know it&rsquo;s you.
+
+.cta-container= link_to 'Confirm your email address', @email_address.confirmation_url, class: 'cta'
+
+%p
+  \- DiffAlert

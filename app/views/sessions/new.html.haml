@@ -6,8 +6,8 @@
   .users__form-container
     = form_for :session, url: session_path do |f|
 
-      = f.label :email, 'Email'
-      = f.email_field :email,
+      = f.label :username, 'Email'
+      = f.email_field :username,
         maxlength: 64
 
       = f.label :password, 'Password'
