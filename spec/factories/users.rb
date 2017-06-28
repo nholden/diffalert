@@ -5,8 +5,10 @@ FactoryGirl.define do
     password_confirmation "password"
     sequence :username { |n| "factory-email-#{n}@gmail.com" }
 
-    after(:build) do |user|
-      FactoryGirl.create(:email_address, :primary, user: user)
+    after(:create) do |user, evaluator|
+      if user.primary_email_address.nil?
+        create(:email_address, :primary, user: user)
+      end
     end
   end
 end
