@@ -3,16 +3,16 @@ require 'rails_helper'
 RSpec.describe TriggerForm, type: :model do
 
   describe "validations" do
-    Given(:trigger_form) {
-      TriggerForm.new(
-        modified_file: "todo.md",
-        email: "test@gmail.com",
-        slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
-        message: "Hello world!",
-        branch: "master",
-        repository_name: "sandbox",
-      )
-    }
+    Given(:trigger_form) { TriggerForm.new(default_attrs) }
+
+    Given(:default_attrs) { {
+      modified_file: "todo.md",
+      email: "test@gmail.com",
+      slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
+      message: "Hello world!",
+      branch: "master",
+      repository_name: "sandbox",
+    } }
 
     describe "modified_file" do
       Given { trigger_form.modified_file = modified_file }
