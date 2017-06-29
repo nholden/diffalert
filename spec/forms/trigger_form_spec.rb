@@ -7,7 +7,7 @@ RSpec.describe TriggerForm, type: :model do
 
     Given(:default_attrs) { {
       modified_file: "todo.md",
-      email: "test@gmail.com",
+      email_address_address: "test@gmail.com",
       slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
       message: "Hello world!",
       branch: "master",
@@ -42,40 +42,40 @@ RSpec.describe TriggerForm, type: :model do
       end
     end
 
-    describe "email and slack_webhook_url" do
-      Given { trigger_form.email = email }
+    describe "email_address_address and slack_webhook_url" do
+      Given { trigger_form.email_address_address = email_address_address }
       Given { trigger_form.slack_webhook_url = slack_webhook_url }
 
-      context "it is valid with a valid email" do
-        When(:email) { 'tony.gwynn@padres.com' }
+      context "it is valid with a valid email_address_address" do
+        When(:email_address_address) { 'tony.gwynn@padres.com' }
         When(:slack_webhook_url) { '' }
 
         Then { trigger_form.valid? }
       end
 
-      context "it is invalid with an invalid email" do
-        When(:email) { 'tony.gwynn@padres' }
+      context "it is invalid with an invalid email_address_address" do
+        When(:email_address_address) { 'tony.gwynn@padres' }
         When(:slack_webhook_url) { '' }
 
         Then { !trigger_form.valid? }
       end
 
       context "it is valid with a valid slack_webhook_url" do
-        When(:email) { '' }
+        When(:email_address_address) { '' }
         When(:slack_webhook_url) { 'https://hooks.slack.com/services/foo/bar' }
 
         Then { trigger_form.valid? }
       end
 
       context "it is invalid with an invalid slack_webhook_url" do
-        When(:email) { '' }
+        When(:email_address_address) { '' }
         When(:slack_webhook_url) { 'https://hooks.google.com/services/foo/bar' }
 
         Then { !trigger_form.valid? }
       end
 
-      context "it is invalid with a blank email and a blank slack_webhook_url" do
-        When(:email) { ' ' }
+      context "it is invalid with a blank email_address_address and a blank slack_webhook_url" do
+        When(:email_address_address) { ' ' }
         When(:slack_webhook_url) { ' ' }
 
         Then { !trigger_form.valid? }

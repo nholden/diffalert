@@ -43,7 +43,7 @@ class TriggerFormsController < ApplicationController
   private
 
   def trigger_form_params
-    params.require(:trigger_form).permit(:repository_name, :branch, :modified_file, :email, :slack_webhook_url, :message)
+    params.require(:trigger_form).permit(:repository_name, :branch, :modified_file, :email_address_address, :slack_webhook_url, :message)
   end
 
 end

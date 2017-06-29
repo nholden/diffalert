@@ -13,10 +13,10 @@
   maxlength: 64
 = f.error_messages :modified_file
 
-= f.label :email, 'Email'
-= f.email_field :email,
+= f.label :email_address_address, 'Email'
+= f.email_field :email_address_address,
   maxlength: 64
-= f.error_messages :email
+= f.error_messages :email_address_address
 
 = f.label :slack_webhook_url, 'Slack webhook URL'
 = f.url_field :slack_webhook_url,

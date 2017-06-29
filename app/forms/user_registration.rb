@@ -1,7 +1,6 @@
 class UserRegistration
 
   include ActiveModel::Model
-  include ActiveRecord::SecureToken
 
   attr_accessor(
     :username,
@@ -43,14 +42,12 @@ class UserRegistration
       user.username = username
       user.password = password
       user.password_confirmation = password_confirmation
-      user.github_events_secret = self.class.generate_unique_secure_token
     end
   end
 
   def create_email_address!
     user.create_primary_email_address! do |email_address|
       email_address.address = user.username
-      email_address.confirmation_token = self.class.generate_unique_secure_token
     end
   end
 

@@ -6,6 +6,9 @@ class EmailAddress < ApplicationRecord
   ]
 
   belongs_to :user
+  has_many :triggers
+
+  has_secure_token :confirmation_token
 
   validates :address,
     presence: true,
@@ -13,7 +16,6 @@ class EmailAddress < ApplicationRecord
     uniqueness: { case_sensitive: false }
 
   validates :address_type, presence: true
-  validates :confirmation_token, presence: true
 
   def confirmed?
     confirmed_at.present?

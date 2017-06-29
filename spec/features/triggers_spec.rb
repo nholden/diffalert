@@ -10,6 +10,9 @@ RSpec.describe "triggers" do
     When { visit triggers_path }
 
     describe "creating a new Trigger" do
+      Given(:trigger) { user.triggers.last }
+      Given(:email_address) { trigger.email_address }
+
       When { click_link 'Add trigger' }
 
       When { fill_in 'Paste the GitHub link to the file you’d like to monitor',
@@ -29,12 +32,16 @@ RSpec.describe "triggers" do
       And { expect(page).to have_content "Secret #{user.github_events_secret}" }
       And { expect(page).to have_content 'Which events would you like to trigger this webhook? Just the push event' }
 
-      And { user.triggers.last.repository_name == 'sandbox' }
-      And { user.triggers.last.branch == 'master' }
-      And { user.triggers.last.modified_file == 'README.md' }
-      And { user.triggers.last.email == 'qwerty@slack.com' }
-      And { user.triggers.last.slack_webhook_url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
-      And { user.triggers.last.message == 'README.md changed!' }
+      And { trigger.repository_name == 'sandbox' }
+      And { trigger.branch == 'master' }
+      And { trigger.modified_file == 'README.md' }
+      And { trigger.slack_webhook_url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
+      And { trigger.message == 'README.md changed!' }
+
+      And { email_address.address = 'qwerty@slack.com' }
+      And { email_address.address_type = EmailAddress::ALERT_TYPE }
+      And { email_address.confirmation_token.present? }
+      And { email_address.confirmed_at.nil? }
     end
 
     describe "deleting a Trigger" do

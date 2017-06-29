@@ -22,7 +22,7 @@ class GithubEventResponsesController < ApplicationController
   def create_alerts!
     user.triggers.for_event(Github::PushEvent.new(request.params)).each do |trigger|
       trigger.alerts.create!(
-        email: trigger.email,
+        email: trigger.email_address_address,
         slack_webhook_url: trigger.slack_webhook_url,
         message: trigger.message
       )
