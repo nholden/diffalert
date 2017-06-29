@@ -6,9 +6,9 @@ class TriggerBuilder
 
   validates :github_url, presence: true, format: { with: Patterns::GITHUB_FILE_URL_REGEX }
 
-  def trigger_params
+  def trigger_form_params
     {
-      trigger: {
+      trigger_form: {
         branch: branch,
         repository_name: repository,
         modified_file: file,

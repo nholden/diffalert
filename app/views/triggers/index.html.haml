@@ -36,7 +36,7 @@
         .attribute
           .label Actions
           .value
-          #{link_to 'Edit', edit_trigger_path(trigger)} | #{link_to 'Delete', trigger_path(trigger), method: :delete}
+          #{link_to 'Edit', edit_trigger_form_path(trigger)} | #{link_to 'Delete', trigger_path(trigger), method: :delete}
 
   .triggers__new-trigger
     = link_to 'Add trigger', new_trigger_builder_path

@@ -8,7 +8,7 @@ class TriggerBuildersController < ApplicationController
     @trigger_builder = TriggerBuilder.new(trigger_builder_params)
 
     if @trigger_builder.valid?
-      redirect_to new_trigger_path(@trigger_builder.trigger_params)
+      redirect_to new_trigger_form_path(@trigger_builder.trigger_form_params)
     else
       render 'new'
     end

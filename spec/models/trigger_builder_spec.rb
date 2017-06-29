@@ -21,15 +21,15 @@ RSpec.describe TriggerBuilder do
     end
   end
 
-  describe "#trigger_params" do
+  describe "#trigger_form_params" do
     Given(:trigger_builder) { TriggerBuilder.new(github_url: github_url) }
     Given(:github_url) { "https://github.com/nholden/sandbox/blob/master/README.md" }
 
-    When(:result) { trigger_builder.trigger_params }
+    When(:result) { trigger_builder.trigger_form_params }
 
-    Then { result[:trigger][:repository_name] == "sandbox" }
-    And { result[:trigger][:branch] == "master" }
-    And { result[:trigger][:modified_file] == "README.md" }
+    Then { result[:trigger_form][:repository_name] == "sandbox" }
+    And { result[:trigger_form][:branch] == "master" }
+    And { result[:trigger_form][:modified_file] == "README.md" }
   end
 
 end

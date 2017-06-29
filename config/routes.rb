@@ -13,7 +13,8 @@ Rails.application.routes.draw do
     resource :confirmation_resend, only: %w(new), controller: 'email_address_confirmation_resends'
   end
 
-  resources :triggers, except: %w(show)
+  resources :triggers, only: %w(index destroy)
+  resources :trigger_forms, only: %w(new create edit update), param: :trigger_id
   resources :trigger_builders, only: %w(new create)
   resource :session, only: %w(new create destroy)
 
