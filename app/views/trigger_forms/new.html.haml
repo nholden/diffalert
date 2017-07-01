@@ -3,5 +3,5 @@
     %h1 Create a new trigger
 
   .triggers__form-container
-    = form_for @trigger_form do |f|
+    = form_for @trigger_form, html: { novalidate: 'novalidate' } do |f|
       - render partial: 'form', locals: { f: f }

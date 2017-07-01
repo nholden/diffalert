@@ -1,6 +1,7 @@
 class TriggerForm
 
   include ActiveModel::Model
+  include Draper::Decoratable
 
   attr_accessor(
     :trigger,

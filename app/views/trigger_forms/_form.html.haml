@@ -15,8 +15,18 @@
 
 = f.label :email_address_address, 'Email'
 = f.email_field :email_address_address,
+  data: { 'text-input-to-selectize' => true },
   maxlength: 64
 = f.error_messages :email_address_address
+
+:javascript
+  TextInputToSelectize(
+    $('[data-text-input-to-selectize]'),
+    {
+      items: #{f.object.decorate.email_selectize_items},
+      options: #{f.object.decorate.email_selectize_options}
+    }
+  );
 
 = f.label :slack_webhook_url, 'Slack webhook URL'
 = f.url_field :slack_webhook_url,

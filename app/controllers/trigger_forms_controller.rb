@@ -5,12 +5,11 @@ class TriggerFormsController < ApplicationController
   expose :trigger, -> { current_user.triggers.find(params[:trigger_id]) }
 
   def new
-    @trigger_form = TriggerForm.new(trigger_form_params)
+    @trigger_form = TriggerForm.new(trigger_form_params.merge(user: current_user))
   end
 
   def create
-    @trigger_form = TriggerForm.new(trigger_form_params)
-    @trigger_form.user = current_user
+    @trigger_form = TriggerForm.new(trigger_form_params.merge(user: current_user))
 
     if @trigger_form.valid?
       @trigger_form.save!
@@ -22,14 +21,12 @@ class TriggerFormsController < ApplicationController
   end
 
   def edit
-    @trigger_form = TriggerForm.new(trigger: trigger)
+    @trigger_form = TriggerForm.new(trigger: trigger, user: current_user)
     @trigger_form.set_default_data
   end
 
   def update
-    @trigger_form = TriggerForm.new(trigger_form_params)
-    @trigger_form.trigger = trigger
-    @trigger_form.user = trigger.user
+    @trigger_form = TriggerForm.new(trigger_form_params.merge({ trigger: trigger, user: trigger.user }))
 
     if @trigger_form.valid?
       @trigger_form.save!
