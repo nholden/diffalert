@@ -28,6 +28,12 @@
     font-size: 85%;
     color: $red;
   }
+
+  .selectize-dropdown-content {
+    .option-label {
+      color: $medium-gray;
+    }
+  }
 }
 
 fieldset {

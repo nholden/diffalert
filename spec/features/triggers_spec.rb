@@ -21,6 +21,7 @@ RSpec.describe "triggers" do
 
       When { fill_in 'Branch', with: 'master' }
       When { fill_in 'Email', with: 'qwerty@slack.com' }
+      When { fill_in 'Name this email', with: 'Qwerty work' }
       When { fill_in 'Slack webhook URL', with: 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
       When { fill_in 'Message', with: 'README.md changed!' }
       When { click_button 'Save trigger' }
@@ -38,7 +39,8 @@ RSpec.describe "triggers" do
       And { trigger.slack_webhook_url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
       And { trigger.message == 'README.md changed!' }
 
-      And { email_address.address = 'qwerty@slack.com' }
+      And { email_address.address == 'qwerty@slack.com' }
+      And { email_address.name == 'Qwerty work' }
       And { email_address.address_type = EmailAddress::ALERT_TYPE }
       And { email_address.confirmation_token.present? }
       And { email_address.confirmed_at.nil? }

@@ -19,6 +19,11 @@
   maxlength: 64
 = f.error_messages :email_address_address
 
+= f.label :email_address_name, 'Name this email'
+= f.text_field :email_address_name,
+  maxlength: 64
+= f.error_messages :email_address_name
+
 :javascript
   TextInputToSelectize(
     $('[data-text-input-to-selectize]'),

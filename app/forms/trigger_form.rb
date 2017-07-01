@@ -11,6 +11,7 @@ class TriggerForm
     :branch,
     :modified_file,
     :email_address_address,
+    :email_address_name,
     :slack_webhook_url,
     :message,
   )
@@ -45,6 +46,11 @@ class TriggerForm
       self.email_address ||= user.email_addresses.find_or_initialize_by(address: email_address_address)
       self.email_address.address_type ||= EmailAddress::ALERT_TYPE
       self.email_address.address = email_address_address
+
+      if email_address_name.present?
+        self.email_address.name = email_address_name
+      end
+
       email_address.save! if email_address.new_record? || email_address.changed?
     else
       self.email_address = nil

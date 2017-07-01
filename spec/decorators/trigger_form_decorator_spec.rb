@@ -22,7 +22,7 @@ RSpec.describe TriggerFormDecorator do
   describe "#email_selectize_options" do
     Given { trigger_form.user = user }
     Given(:user) { FactoryGirl.create(:user) }
-    Given { FactoryGirl.create(:email_address, :alert, user: user, address: 'zoinks@bloop.net') }
+    Given { FactoryGirl.create(:email_address, :alert, user: user, address: 'zoinks@bloop.net', name: 'Zoinks personal') }
 
     When(:result) { decorator.email_selectize_options }
 
@@ -30,8 +30,8 @@ RSpec.describe TriggerFormDecorator do
       Given { trigger_form.email_address_address = nil }
 
       Then { result == [
-        { value: user.primary_email_address.address, text: user.primary_email_address.address },
-        { value: 'zoinks@bloop.net', text: 'zoinks@bloop.net' }
+        { value: user.primary_email_address.address },
+        { value: 'zoinks@bloop.net', text: 'Zoinks personal' }
       ].to_json }
     end
 
@@ -39,9 +39,18 @@ RSpec.describe TriggerFormDecorator do
       Given { trigger_form.email_address_address = 'woah@hey.yo' }
 
       Then { result == [
-        { value: 'woah@hey.yo', text: 'woah@hey.yo' },
-        { value: user.primary_email_address.address, text: user.primary_email_address.address },
-        { value: 'zoinks@bloop.net', text: 'zoinks@bloop.net' },
+        { value: 'woah@hey.yo' },
+        { value: user.primary_email_address.address },
+        { value: 'zoinks@bloop.net', text: 'Zoinks personal' },
+      ].to_json }
+    end
+
+    context "when email_address_address matches an existing email_address" do
+      Given { trigger_form.email_address_address = 'zoinks@bloop.net' }
+
+      Then { result == [
+        { value: 'zoinks@bloop.net', text: 'Zoinks personal' },
+        { value: user.primary_email_address.address },
       ].to_json }
     end
   end

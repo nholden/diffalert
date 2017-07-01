@@ -2,17 +2,17 @@ require 'rails_helper'
 
 RSpec.describe TriggerForm, type: :model do
 
+  Given(:default_attrs) { {
+    modified_file: "todo.md",
+    email_address_address: "test@gmail.com",
+    slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
+    message: "Hello world!",
+    branch: "master",
+    repository_name: "sandbox",
+  } }
+
   describe "validations" do
     Given(:trigger_form) { TriggerForm.new(default_attrs) }
-
-    Given(:default_attrs) { {
-      modified_file: "todo.md",
-      email_address_address: "test@gmail.com",
-      slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
-      message: "Hello world!",
-      branch: "master",
-      repository_name: "sandbox",
-    } }
 
     describe "modified_file" do
       Given { trigger_form.modified_file = modified_file }
@@ -108,6 +108,25 @@ RSpec.describe TriggerForm, type: :model do
         When(:repository_name) { ' ' }
         Then { !trigger_form.valid? }
       end
+    end
+  end
+
+  describe "#save!" do
+    Given(:trigger_form) { TriggerForm.new(default_attrs.merge({ trigger: trigger, user: trigger.user, email_address: email_address })) }
+    Given(:trigger) { FactoryGirl.create(:trigger, email_address: email_address) }
+    Given(:email_address) { FactoryGirl.create(:email_address, :alert, name: 'Gmail') }
+
+    When { trigger_form.save! }
+    When { email_address.reload }
+
+    context "when email_address_name is present, it updates the email address's name" do
+      Given { trigger_form.email_address_name = 'Yahoo' }
+      Then { email_address.name == 'Yahoo' }
+    end
+
+    context "when email_address_name is blank, it does not update the email address's name" do
+      Given { trigger_form.email_address_name = ' ' }
+      Then { email_address.name == 'Gmail' }
     end
   end
 
