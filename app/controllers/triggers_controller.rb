@@ -2,13 +2,7 @@ class TriggersController < ApplicationController
 
   include RequiresSignIn
 
-  expose :triggers, -> {
-    current_user.
-      triggers.
-      left_outer_joins(:recent_alert).
-      order('lower(triggers.repository_name) ASC, alerts.created_at DESC').
-      decorate
-  }
+  expose :triggers, -> { current_user.triggers.order('lower(repository_name)').decorate }
 
   def index
   end
