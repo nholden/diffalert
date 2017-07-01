@@ -19,17 +19,19 @@
   maxlength: 64
 = f.error_messages :email_address_address
 
-= f.label :email_address_name, 'Name this email'
-= f.text_field :email_address_name,
-  maxlength: 64
-= f.error_messages :email_address_name
+.hidden{ data: { 'email-name-container' => true } }
+  = f.label :email_address_name, 'Name this email'
+  = f.text_field :email_address_name,
+    maxlength: 64
+  = f.error_messages :email_address_name
 
 :javascript
   TextInputToSelectize(
     $('[data-text-input-to-selectize]'),
     {
       items: #{f.object.decorate.email_selectize_items},
-      options: #{f.object.decorate.email_selectize_options}
+      options: #{f.object.decorate.email_selectize_options},
+      missingTextContainer: $('[data-email-name-container]'),
     }
   );
 
