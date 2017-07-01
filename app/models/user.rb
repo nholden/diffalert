@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :triggers
   has_many :alerts, through: :triggers
   has_many :email_addresses
+  has_many :slack_webhooks
   has_one :primary_email_address, -> { where address_type: EmailAddress::PRIMARY_TYPE }, class_name: 'EmailAddress'
 
   has_secure_password

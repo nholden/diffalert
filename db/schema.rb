@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701160745) do
+ActiveRecord::Schema.define(version: 20170701210621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20170701160745) do
     t.index ["user_id"], name: "index_email_addresses_on_user_id"
   end
 
+  create_table "slack_webhooks", force: :cascade do |t|
+    t.string "url"
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_slack_webhooks_on_user_id"
+  end
+
   create_table "triggers", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.string "modified_file"
@@ -49,7 +58,9 @@ ActiveRecord::Schema.define(version: 20170701160745) do
     t.string "repository_name"
     t.string "slack_webhook_url"
     t.integer "email_address_id"
+    t.integer "slack_webhook_id"
     t.index ["email_address_id"], name: "index_triggers_on_email_address_id"
+    t.index ["slack_webhook_id"], name: "index_triggers_on_slack_webhook_id"
     t.index ["user_id"], name: "index_triggers_on_user_id"
   end
 

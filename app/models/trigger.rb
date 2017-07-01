@@ -2,6 +2,7 @@ class Trigger < ApplicationRecord
 
   belongs_to :user
   belongs_to :email_address, optional: true
+  belongs_to :slack_webhook, optional: true
   has_many :alerts
   has_one :recent_alert, -> { order(created_at: :desc) }, class_name: 'Alert'
 

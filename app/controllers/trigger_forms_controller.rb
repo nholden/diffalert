@@ -47,6 +47,7 @@ class TriggerFormsController < ApplicationController
       :email_address_address,
       :email_address_name,
       :slack_webhook_url,
+      :slack_webhook_name,
       :message,
     )
   end

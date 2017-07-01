@@ -46,7 +46,7 @@ RSpec.describe "Github event responses" do
         context "when the push is a single commit" do
           Then { alert.trigger == trigger }
           And { alert.email == trigger.email_address_address }
-          And { alert.slack_webhook_url == trigger.slack_webhook_url }
+          And { alert.slack_webhook_url == trigger.slack_webhook.url }
           And { alert.message == trigger.message }
         end
 
@@ -58,7 +58,7 @@ RSpec.describe "Github event responses" do
 
             Then { alert.trigger == trigger }
             And { alert.email == trigger.email_address_address }
-            And { alert.slack_webhook_url == trigger.slack_webhook_url }
+            And { alert.slack_webhook_url == trigger.slack_webhook.url }
             And { alert.message == trigger.message }
           end
 

@@ -38,7 +38,11 @@
 = f.label :slack_webhook_url, 'Slack webhook URL'
 = f.url_field :slack_webhook_url,
   maxlength: 128
-= f.error_messages :slack_webhook_url
+
+= f.label :slack_webhook_name, 'Name this Slack webhook'
+= f.text_field :slack_webhook_name,
+  maxlength: 64
+= f.error_messages :slack_webhook_name
 
 = f.label :message, 'Message'
 = f.text_area :message,

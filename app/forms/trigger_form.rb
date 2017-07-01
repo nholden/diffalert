@@ -7,12 +7,14 @@ class TriggerForm
     :trigger,
     :user,
     :email_address,
+    :slack_webhook,
     :repository_name,
     :branch,
     :modified_file,
     :email_address_address,
     :email_address_name,
     :slack_webhook_url,
+    :slack_webhook_name,
     :message,
   )
 
@@ -26,6 +28,7 @@ class TriggerForm
   def save!
     Trigger.transaction do
       save_email_address!
+      save_slack_webhook!
       save_trigger!
     end
   end
@@ -45,7 +48,6 @@ class TriggerForm
     if email_address_address.present?
       self.email_address ||= user.email_addresses.find_or_initialize_by(address: email_address_address)
       self.email_address.address_type ||= EmailAddress::ALERT_TYPE
-      self.email_address.address = email_address_address
 
       if email_address_name.present?
         self.email_address.name = email_address_name
@@ -57,15 +59,29 @@ class TriggerForm
     end
   end
 
+  def save_slack_webhook!
+    if slack_webhook_url.present?
+      self.slack_webhook ||= user.slack_webhooks.find_or_initialize_by(url: slack_webhook_url)
+
+      if slack_webhook_name.present?
+        self.slack_webhook.name = slack_webhook_name
+      end
+
+      slack_webhook.save! if slack_webhook.new_record? || slack_webhook.changed?
+    else
+      self.slack_webhook = nil
+    end
+  end
+
   def save_trigger!
     self.trigger ||= Trigger.new
     self.trigger.user = user
     self.trigger.repository_name = repository_name
     self.trigger.branch = branch
     self.trigger.modified_file = modified_file
-    self.trigger.slack_webhook_url = slack_webhook_url
     self.trigger.message = message
     self.trigger.email_address = email_address
+    self.trigger.slack_webhook = slack_webhook
     trigger.save! if trigger.new_record? || trigger.changed?
   end
 

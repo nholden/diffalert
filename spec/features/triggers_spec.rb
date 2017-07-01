@@ -12,6 +12,7 @@ RSpec.describe "triggers" do
     describe "creating a new Trigger" do
       Given(:trigger) { user.triggers.last }
       Given(:email_address) { trigger.email_address }
+      Given(:slack_webhook) { trigger.slack_webhook }
 
       When { click_link 'Add trigger' }
 
@@ -23,6 +24,7 @@ RSpec.describe "triggers" do
       When { fill_in 'Email', with: 'qwerty@slack.com' }
       When { fill_in 'Name this email', with: 'Qwerty work' }
       When { fill_in 'Slack webhook URL', with: 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
+      When { fill_in 'Name this Slack webhook', with: '#general' }
       When { fill_in 'Message', with: 'README.md changed!' }
       When { click_button 'Save trigger' }
 
@@ -36,7 +38,6 @@ RSpec.describe "triggers" do
       And { trigger.repository_name == 'sandbox' }
       And { trigger.branch == 'master' }
       And { trigger.modified_file == 'README.md' }
-      And { trigger.slack_webhook_url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
       And { trigger.message == 'README.md changed!' }
 
       And { email_address.address == 'qwerty@slack.com' }
@@ -44,6 +45,9 @@ RSpec.describe "triggers" do
       And { email_address.address_type = EmailAddress::ALERT_TYPE }
       And { email_address.confirmation_token.present? }
       And { email_address.confirmed_at.nil? }
+
+      And { slack_webhook.url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
+      And { slack_webhook.name == '#general' }
     end
 
     describe "deleting a Trigger" do
