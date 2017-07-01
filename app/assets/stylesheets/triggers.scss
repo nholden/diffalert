@@ -19,11 +19,16 @@ $triggers-index--large-up: (
     @include grid-container;
     margin: $base-spacing 0;
 
+    @include grid-media($triggers-index--large-up) {
+      display: table;
+      width: 100%;
+    }
+
     &__headers {
       display: none;
 
       @include grid-media($triggers-index--large-up) {
-        display: block;
+        display: table-row;
 
         .header {
           @include grid-column(1);
@@ -41,6 +46,7 @@ $triggers-index--large-up: (
       @include grid-media($triggers-index--large-up) {
         border: 0;
         padding: 0;
+        display: table-row;
       }
 
       .attribute {
@@ -60,8 +66,9 @@ $triggers-index--large-up: (
 
         @include grid-media($triggers-index--large-up) {
           @include grid-column(1);
-          border-bottom: $base-border;
+          border-top: $base-border;
           padding: $small-spacing 0;
+          display: table-cell;
         }
       }
     }
