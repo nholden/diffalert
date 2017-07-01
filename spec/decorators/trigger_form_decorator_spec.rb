@@ -55,4 +55,51 @@ RSpec.describe TriggerFormDecorator do
     end
   end
 
+  describe "#slack_webhook_selectize_items" do
+    When(:result) { decorator.slack_webhook_selectize_items }
+
+    context "when slack_webhook_url is nil" do
+      Given { trigger_form.slack_webhook_url = nil }
+      Then { result == [].to_json }
+    end
+
+    context "when slack_webhook_url is present" do
+      Given { trigger_form.slack_webhook_url = 'https://hooks.slack.com/services/WOAH' }
+      Then { result == ['https://hooks.slack.com/services/WOAH'].to_json }
+    end
+  end
+
+  describe "#slack_webhook_selectize_options" do
+    Given { trigger_form.user = user }
+    Given(:user) { FactoryGirl.create(:user) }
+    Given { FactoryGirl.create(:slack_webhook, user: user, url: 'https://hooks.slack.com/services/BEEPBOOP', name: '#watercooler') }
+
+    When(:result) { decorator.slack_webhook_selectize_options }
+
+    context "when slack_webhook_url is nil" do
+      Given { trigger_form.slack_webhook_url = nil }
+
+      Then { result == [
+        { value: 'https://hooks.slack.com/services/BEEPBOOP', text: '#watercooler' },
+      ].to_json }
+    end
+
+    context "when slack_webhook_url is present" do
+      Given { trigger_form.slack_webhook_url = 'https://hooks.slack.com/services/BORK' }
+
+      Then { result == [
+        { value: 'https://hooks.slack.com/services/BORK' },
+        { value: 'https://hooks.slack.com/services/BEEPBOOP', text: '#watercooler' },
+      ].to_json }
+    end
+
+    context "when email_address_address matches an existing email_address" do
+      Given { trigger_form.slack_webhook_url = 'https://hooks.slack.com/services/BEEPBOOP' }
+
+      Then { result == [
+        { value: 'https://hooks.slack.com/services/BEEPBOOP', text: '#watercooler' },
+      ].to_json }
+    end
+  end
+
 end

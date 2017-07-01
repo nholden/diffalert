@@ -11,7 +11,7 @@ class EmailAddressDecorator < Draper::Decorator
       result[:value] = object.address
 
       if object.name.present?
-        result[:text ] = object.name
+        result[:text] = object.name
       end
     end
   end
