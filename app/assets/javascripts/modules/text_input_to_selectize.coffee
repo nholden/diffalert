@@ -16,12 +16,12 @@ class window.TextInputToSelectize
       onChange: ->
         if opts.missingTextContainer? then opts.missingTextContainer.find('input').val('')
       onBlur: ->
-        if opts.missingTextContainer?
+        if opts.missingTextContainer? && this.items[0]?
           itemValue = this.items[0]
           itemText = this.options[itemValue].text
           if itemText? && itemText != itemValue then opts.missingTextContainer.hide() else opts.missingTextContainer.show()
       onInitialize: ->
-        if opts.missingTextContainer?
+        if opts.missingTextContainer? && this.items[0]?
           itemValue = this.items[0]
           itemText = this.options[itemValue].text
           if itemText? && itemText != itemValue then opts.missingTextContainer.hide() else opts.missingTextContainer.show()
