@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170701210621) do
+ActiveRecord::Schema.define(version: 20170701213709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20170701210621) do
     t.text "message"
     t.string "branch"
     t.string "repository_name"
-    t.string "slack_webhook_url"
     t.integer "email_address_id"
     t.integer "slack_webhook_id"
     t.index ["email_address_id"], name: "index_triggers_on_email_address_id"

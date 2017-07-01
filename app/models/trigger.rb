@@ -11,8 +11,8 @@ class Trigger < ApplicationRecord
                                        repository_name: event.repository_name) }
 
   validates :modified_file, :message, :branch, :repository_name, presence: true
-  validates :slack_webhook_url, format: { with: Patterns::SLACK_WEBHOOK_URL_REGEX }, allow_blank: true
 
   delegate :address, to: :email_address, prefix: true, allow_nil: true
+  delegate :url, to: :slack_webhook, prefix: true, allow_nil: true
 
 end

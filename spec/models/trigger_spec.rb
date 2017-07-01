@@ -33,20 +33,6 @@ RSpec.describe Trigger, type: :model do
       end
     end
 
-    describe "slack_webhook_url" do
-      Given { trigger.slack_webhook_url = slack_webhook_url }
-
-      context "it is valid with a valid slack_webhook_url" do
-        When(:slack_webhook_url) { 'https://hooks.slack.com/services/foo/bar' }
-        Then { trigger.valid? }
-      end
-
-      context "it is invalid with an invalid slack_webhook_url" do
-        When(:slack_webhook_url) { 'https://hooks.google.com/services/foo/bar' }
-        Then { !trigger.valid? }
-      end
-    end
-
     describe "branch" do
       Given { trigger.branch = branch }
 
