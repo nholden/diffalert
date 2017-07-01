@@ -3,7 +3,7 @@ class Trigger < ApplicationRecord
   belongs_to :user
   belongs_to :email_address, optional: true
   has_many :alerts
-  has_one :recent_alert, -> { order(:created_at) }, class_name: 'Alert'
+  has_one :recent_alert, -> { order(created_at: :desc) }, class_name: 'Alert'
 
   scope :for_event, -> (event) { where(modified_file: event.modified_files,
                                        branch: event.branch,
