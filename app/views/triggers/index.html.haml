@@ -15,7 +15,7 @@
       .header Last alert
       .header Actions
 
-    - current_user.triggers.each do |trigger|
+    - triggers.each do |trigger|
       .triggers__triggers-index__trigger
         .attribute
           .label Repository
@@ -28,11 +28,7 @@
           .value= trigger.modified_file
         .attribute
           .label Last alert
-          .value
-            - if trigger.alerts.any?
-              #{time_ago_in_words(trigger.alerts.last.created_at)} ago
-            - else
-              Never
+          .value= trigger.last_alert_time_ago
         .attribute
           .label Actions
           .value

@@ -2,13 +2,19 @@ class TriggersController < ApplicationController
 
   include RequiresSignIn
 
-  expose :trigger, -> { current_user.triggers.find(params[:id]) }
+  expose :triggers, -> {
+    current_user.
+      triggers.
+      left_outer_joins(:recent_alert).
+      order('lower(triggers.repository_name) ASC, alerts.created_at DESC').
+      decorate
+  }
 
   def index
   end
 
   def destroy
-    trigger.destroy!
+    current_user.triggers.find(params[:id]).destroy!
     flash[:notice] = 'Trigger deleted.'
     redirect_to triggers_path
   end
