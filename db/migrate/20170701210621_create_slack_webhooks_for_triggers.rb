@@ -10,6 +10,7 @@ class CreateSlackWebhooksForTriggers < ActiveRecord::Migration[5.1]
               user_id: trigger.user_id,
               url: trigger.slack_webhook_url,
             )
+            trigger.save!
           end
         else
           trigger.delete
