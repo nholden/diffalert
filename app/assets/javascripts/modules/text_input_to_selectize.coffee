@@ -25,9 +25,14 @@ class window.TextInputToSelectize
           else
             opts.missingTextContainer.hide()
       onInitialize: ->
-        if opts.missingTextContainer?
-          itemValue = this.items[0]
+        itemValue = this.items[0]
 
+        # Prevents input element from creating a new blank line in
+        # selectize-input div when initial item has a long name
+        if itemValue?
+          this.hideInput()
+
+        if opts.missingTextContainer?
           if itemValue?
             itemText = this.options[itemValue].text
             if itemText? && itemText != itemValue then opts.missingTextContainer.hide() else opts.missingTextContainer.show()
