@@ -4,13 +4,21 @@
 = f.error_messages :repository_name
 
 = f.label :branch, 'Branch'
+= f.check_box :all_branches,
+  data: { 'checkbox-toggler' => 'all-branches' }
+= f.label :all_branches, 'All branches', class: 'inline'
 = f.text_field :branch,
-  maxlength: 64
+  maxlength: 64,
+  data: { 'hide-if-checked' => 'all-branches' }
 = f.error_messages :branch
 
 = f.label :modified_file, 'File path'
+= f.check_box :all_modified_files,
+  data: { 'checkbox-toggler' => 'all-modified-files' }
+= f.label :all_modified_files, 'All files', class: 'inline'
 = f.text_field :modified_file,
-  maxlength: 64
+  maxlength: 64,
+  data: { 'hide-if-checked' => 'all-modified-files' }
 = f.error_messages :modified_file
 
 = f.label :email_address_address, 'Email'

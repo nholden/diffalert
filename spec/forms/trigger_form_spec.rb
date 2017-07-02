@@ -22,7 +22,13 @@ RSpec.describe TriggerForm, type: :model do
         Then { trigger_form.valid? }
       end
 
-      context "it is invalid a blank modified file" do
+      context "it is valid with a blank modified file when all files checked" do
+        Given { trigger_form.all_modified_files = "1" }
+        When(:modified_file) { ' ' }
+        Then { trigger_form.valid? }
+      end
+
+      context "it is invalid with a blank modified file when all files unchecked" do
         When(:modified_file) { ' ' }
         Then { !trigger_form.valid? }
       end
@@ -90,7 +96,13 @@ RSpec.describe TriggerForm, type: :model do
         Then { trigger_form.valid? }
       end
 
-      context "it is invalid a blank branch" do
+      context "it is valid with a blank branch when all branches checked" do
+        Given { trigger_form.all_branches = "1" }
+        When(:branch) { ' ' }
+        Then { trigger_form.valid? }
+      end
+
+      context "it is invalid with a blank branch when all branches not checked" do
         When(:branch) { ' ' }
         Then { !trigger_form.valid? }
       end

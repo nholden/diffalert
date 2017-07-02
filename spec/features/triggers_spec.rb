@@ -1,5 +1,6 @@
 require 'rails_helper'
 require 'support/authentication_helper'
+require 'support/trigger_form_helper'
 
 RSpec.describe "triggers" do
 
@@ -15,17 +16,9 @@ RSpec.describe "triggers" do
       Given(:slack_webhook) { trigger.slack_webhook }
 
       When { click_link 'Add trigger' }
-
-      When { fill_in 'Paste the GitHub link to the file you’d like to monitor',
-             with: 'https://github.com/nholden/sandbox/blob/other-branch/README.md' }
+      When { fill_in_trigger_builder }
       When { click_button 'Next' }
-
-      When { fill_in 'Branch', with: 'master' }
-      When { fill_in 'Email', with: 'qwerty@slack.com' }
-      When { fill_in 'Name this email', with: 'Qwerty work' }
-      When { fill_in 'Slack webhook URL', with: 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
-      When { fill_in 'Name this Slack webhook', with: '#general' }
-      When { fill_in 'Message', with: 'README.md changed!' }
+      When { fill_in_trigger_form }
       When { click_button 'Save trigger' }
 
       Then { expect(page).to have_content 'New trigger created!' }
@@ -48,6 +41,32 @@ RSpec.describe "triggers" do
 
       And { slack_webhook.url == 'https://hooks.slack.com/services/FOO/BAR/FOOBAR' }
       And { slack_webhook.name == '#general' }
+    end
+
+    describe "creating a new Trigger for all branches" do
+      Given(:trigger) { user.triggers.last }
+
+      When { click_link 'Add trigger' }
+      When { fill_in_trigger_builder }
+      When { click_button 'Next' }
+      When { fill_in_trigger_form }
+      When { check 'All branches' }
+      When { click_button 'Save trigger' }
+
+      Then { trigger.branch.nil? }
+    end
+
+    describe "creating a new Trigger for all modified files" do
+      Given(:trigger) { user.triggers.last }
+
+      When { click_link 'Add trigger' }
+      When { fill_in_trigger_builder }
+      When { click_button 'Next' }
+      When { fill_in_trigger_form }
+      When { check 'All files' }
+      When { click_button 'Save trigger' }
+
+      Then { trigger.modified_file.nil? }
     end
 
     describe "deleting a Trigger" do

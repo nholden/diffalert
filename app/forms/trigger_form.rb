@@ -10,7 +10,9 @@ class TriggerForm
     :slack_webhook,
     :repository_name,
     :branch,
+    :all_branches,
     :modified_file,
+    :all_modified_files,
     :email_address_address,
     :email_address_name,
     :slack_webhook_url,
@@ -18,7 +20,9 @@ class TriggerForm
     :message,
   )
 
-  validates :modified_file, :message, :branch, :repository_name, presence: true
+  validates :message, :repository_name, presence: true
+  validates :modified_file, presence: true, unless: :all_modified_files_checked?
+  validates :branch, presence: true, unless: :all_branches_checked?
   validates :email_address_address, format: { with: Patterns::EMAIL_REGEX }, allow_blank: true
   validates :slack_webhook_url, format: { with: Patterns::SLACK_WEBHOOK_URL_REGEX }, allow_blank: true
   validate :must_have_email_address_address_or_slack_webhook_url
@@ -36,7 +40,9 @@ class TriggerForm
   def set_default_data
     self.repository_name = trigger.repository_name
     self.branch = trigger.branch
+    self.all_branches = trigger.branch.nil?
     self.modified_file = trigger.modified_file
+    self.all_modified_files = trigger.modified_file.nil?
     self.email_address_address = trigger.email_address_address
     self.slack_webhook_url = trigger.slack_webhook_url
     self.message = trigger.message
@@ -77,8 +83,8 @@ class TriggerForm
     self.trigger ||= Trigger.new
     self.trigger.user = user
     self.trigger.repository_name = repository_name
-    self.trigger.branch = branch
-    self.trigger.modified_file = modified_file
+    self.trigger.branch = all_branches == '1' ? nil : branch
+    self.trigger.modified_file = all_modified_files == '1' ? nil : modified_file
     self.trigger.message = message
     self.trigger.email_address = email_address
     self.trigger.slack_webhook = slack_webhook
@@ -90,6 +96,14 @@ class TriggerForm
       errors[:email_address_address] << 'can\'t be blank without a Slack webhook URL'
       errors[:slack_webhook_url] << 'can\'t be blank without an email'
     end
+  end
+
+  def all_modified_files_checked?
+    all_modified_files == '1'
+  end
+
+  def all_branches_checked?
+    all_branches == '1'
   end
 
 end

@@ -53,6 +53,11 @@ label {
   display: block;
   font-weight: $bold;
   margin-bottom: $small-spacing / 2;
+
+  &.inline {
+    display: inline-block;
+    font-weight: $standard-weight;
+  }
 }
 
 input,
@@ -107,6 +112,7 @@ textarea {
 [type="radio"] {
   display: inline;
   margin-right: $small-spacing / 2;
+  margin-bottom: $small-spacing;
 }
 
 [type="file"] {
