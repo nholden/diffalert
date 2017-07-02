@@ -6,11 +6,11 @@ class Trigger < ApplicationRecord
   has_many :alerts
   has_one :recent_alert, -> { order(created_at: :desc) }, class_name: 'Alert'
 
-  scope :for_event, -> (event) { where(modified_file: event.modified_files,
-                                       branch: event.branch,
-                                       repository_name: event.repository_name) }
+  scope :for_event, -> (event) { where(repository_name: event.repository_name).
+                                   where('modified_file IN (?) OR modified_file IS NULL', event.modified_files).
+                                   where('branch = ? OR branch IS NULL', event.branch) }
 
-  validates :modified_file, :message, :branch, :repository_name, presence: true
+  validates :message, :repository_name, presence: true
 
   delegate :address, to: :email_address, prefix: true, allow_nil: true
   delegate :url, to: :slack_webhook, prefix: true, allow_nil: true

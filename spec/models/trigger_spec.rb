@@ -13,9 +13,9 @@ RSpec.describe Trigger, type: :model do
         Then { trigger.valid? }
       end
 
-      context "it is invalid a blank modified file" do
+      context "it is valid with a blank modified file" do
         When(:modified_file) { ' ' }
-        Then { !trigger.valid? }
+        Then { trigger.valid? }
       end
     end
 
@@ -41,9 +41,9 @@ RSpec.describe Trigger, type: :model do
         Then { trigger.valid? }
       end
 
-      context "it is invalid a blank branch" do
+      context "it is valid with a blank branch" do
         When(:branch) { ' ' }
-        Then { !trigger.valid? }
+        Then { trigger.valid? }
       end
     end
 

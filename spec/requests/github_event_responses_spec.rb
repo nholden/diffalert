@@ -70,6 +70,32 @@ RSpec.describe "Github event responses" do
         end
       end
 
+      context "when trigger exists for modified file on any branch" do
+        Given!(:trigger) { FactoryGirl.create(:trigger,
+                                              user: user,
+                                              modified_file: modified_file,
+                                              branch: nil,
+                                              repository_name: repository_name) }
+
+        Then { alert.trigger == trigger }
+        And { alert.email == trigger.email_address_address }
+        And { alert.slack_webhook_url == trigger.slack_webhook.url }
+        And { alert.message == trigger.message }
+      end
+
+      context "when trigger exists for any modified file on branch" do
+        Given!(:trigger) { FactoryGirl.create(:trigger,
+                                              user: user,
+                                              modified_file: nil,
+                                              branch: branch,
+                                              repository_name: repository_name) }
+
+        Then { alert.trigger == trigger }
+        And { alert.email == trigger.email_address_address }
+        And { alert.slack_webhook_url == trigger.slack_webhook.url }
+        And { alert.message == trigger.message }
+      end
+
       context "when trigger exists for modified file on different branch" do
         Given!(:trigger) { FactoryGirl.create(:trigger,
                                               user: user,
