@@ -1481,8 +1481,16 @@
 			// necessary for mobile webkit devices (manual focus triggering
 			// is ignored unless invoked within a click event)
 			if (!self.isFocused) {
-				self.focus();
-				e.preventDefault();
+				// This conditional was added for this project and is not in
+				// the Selectize source. In the close function, if
+				// (self.settings.mode === 'single' && self.items.length)
+				// is true, focus is intentionally removed to close the iOS
+				// keyboard. This prevents focus from being readded, which
+				// would reopen the dropdown menu.
+				if (!(self.settings.mode === 'single' && self.items.length)) {
+					self.focus();
+					e.preventDefault();
+				}
 			}
 		},
 	
