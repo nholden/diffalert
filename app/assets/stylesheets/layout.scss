@@ -22,9 +22,57 @@ html, body {
 
     .menu {
       @include grid-column(6);
-      display: inline-block;
       text-align: right;
       line-height: 5em;
+
+      .menu-items {
+        display: none;
+        position: absolute;
+        right: $base-spacing;
+        top: $base-spacing * 3;
+        padding: $small-spacing;
+        line-height: $base-line-height * 1.5;
+        box-shadow: 0 $small-spacing $base-spacing $dark-gray;
+        background-color: #fff;
+        text-align: right;
+        min-width: $medium-screen/4;
+        border-radius: $base-border-radius;
+      }
+
+      label {
+        float: right;
+        margin: 1em 0;
+        padding: 1em;
+        line-height: 1em;
+        cursor: pointer;
+        border: 1px solid $action-color;
+        border-radius: $base-border-radius;
+        color: $action-color;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      #menu-toggle-check-box {
+        display: none;
+      }
+
+      #menu-toggle-check-box:checked ~ .menu-items {
+        display: inline-block;
+      }
+
+      #menu-toggle-check-box:checked ~ label {
+        span {
+          display: none;
+        }
+
+        &:after {
+          content: 'Close'
+        }
+      }
     }
   }
 

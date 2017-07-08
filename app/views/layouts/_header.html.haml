@@ -5,7 +5,17 @@
     .wordmark= link_to "DiffAlert", root_path
 
   .menu
-    - if current_user
-      #{link_to 'Setup', trigger_setup_instructions_path} | #{link_to 'Log out', session_path, method: :delete}
-    - else
-      #{link_to 'Sign up', new_user_registration_path} | #{link_to 'Log in', new_session_path}
+
+    = check_box_tag 'menu-toggle-check-box'
+    = label_tag 'menu-toggle-check-box' do
+      %span Menu
+
+    .menu-items
+      %ul
+        - if current_user
+          %li= link_to 'Triggers', triggers_path
+          %li= link_to 'Setup', trigger_setup_instructions_path
+          %li= link_to 'Log out', session_path, method: :delete
+        - else
+          %li= link_to 'Sign up', new_user_registration_path
+          %li= link_to 'Log in', new_session_path
