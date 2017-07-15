@@ -84,5 +84,10 @@ $triggers-index--large-up: (
       margin-bottom: $base-spacing;
       font-size: 115%;
     }
+
+    .indented {
+      margin-left: $base-spacing;
+      width: calc(100% - #{$base-spacing});
+    }
   }
 }

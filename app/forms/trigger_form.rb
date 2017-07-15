@@ -21,8 +21,8 @@ class TriggerForm
   )
 
   validates :message, :repository_name, presence: true
-  validates :modified_file, presence: true, unless: :all_modified_files_checked?
-  validates :branch, presence: true, unless: :all_branches_checked?
+  validates :modified_file, presence: true, unless: :all_modified_files_chosen?
+  validates :branch, presence: true, unless: :all_branches_chosen?
   validates :email_address_address, format: { with: Patterns::EMAIL_REGEX }, allow_blank: true
   validates :slack_webhook_url, format: { with: Patterns::SLACK_WEBHOOK_URL_REGEX }, allow_blank: true
   validate :must_have_email_address_address_or_slack_webhook_url
@@ -83,8 +83,8 @@ class TriggerForm
     self.trigger ||= Trigger.new
     self.trigger.user = user
     self.trigger.repository_name = repository_name
-    self.trigger.branch = all_branches == '1' ? nil : branch
-    self.trigger.modified_file = all_modified_files == '1' ? nil : modified_file
+    self.trigger.branch = all_branches_chosen? ? nil : branch
+    self.trigger.modified_file = all_modified_files_chosen? ? nil : modified_file
     self.trigger.message = message
     self.trigger.email_address = email_address
     self.trigger.slack_webhook = slack_webhook
@@ -98,12 +98,12 @@ class TriggerForm
     end
   end
 
-  def all_modified_files_checked?
-    all_modified_files == '1'
+  def all_modified_files_chosen?
+    all_modified_files == 'true'
   end
 
-  def all_branches_checked?
-    all_branches == '1'
+  def all_branches_chosen?
+    all_branches == 'true'
   end
 
 end

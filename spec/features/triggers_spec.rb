@@ -50,7 +50,7 @@ RSpec.describe "triggers" do
       When { fill_in_trigger_builder }
       When { click_button 'Next' }
       When { fill_in_trigger_form }
-      When { check 'All branches' }
+      When { choose 'All branches' }
       When { click_button 'Save trigger' }
 
       Then { trigger.branch.nil? }
@@ -63,7 +63,7 @@ RSpec.describe "triggers" do
       When { fill_in_trigger_builder }
       When { click_button 'Next' }
       When { fill_in_trigger_form }
-      When { check 'All files' }
+      When { choose 'All files' }
       When { click_button 'Save trigger' }
 
       Then { trigger.modified_file.nil? }

@@ -5,7 +5,8 @@ class TriggerFormsController < ApplicationController
   expose :trigger, -> { current_user.triggers.find(params[:trigger_id]) }
 
   def new
-    @trigger_form = TriggerForm.new(trigger_form_params.merge(user: current_user))
+    @trigger_form = TriggerForm.new(trigger: Trigger.new(trigger_form_params), user: current_user)
+    @trigger_form.set_default_data
   end
 
   def create
