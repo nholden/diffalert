@@ -51,7 +51,7 @@ legend {
 
 label {
   display: block;
-  font-weight: $bold;
+  font-weight: $standard-weight;
   margin-bottom: $small-spacing / 2;
 
   &.inline {
@@ -65,6 +65,7 @@ select,
 textarea {
   display: block;
   font-family: $base-font-family;
+  font-weight: $light-weight;
   font-size: $base-font-size;
 }
 

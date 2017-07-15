@@ -32,7 +32,7 @@ $triggers-index--large-up: (
 
         .header {
           @include grid-column(1);
-          font-weight: $bold;
+          font-weight: $standard-weight;
           border-bottom: 1px solid shade($base-border-color, 25%);
           padding: $small-spacing 0;
         }
@@ -53,7 +53,7 @@ $triggers-index--large-up: (
         .label {
           @include grid_column(1, $triggers-index);
           display: inline-block;
-          font-weight: $bold;
+          font-weight: $standard-weight;
 
           @include grid-media($triggers-index--large-up) {
             display: none;
@@ -76,10 +76,17 @@ $triggers-index--large-up: (
 
   &__new-trigger {
     text-align: center;
-    font-weight: $bold;
+    font-weight: $standard-weight;
   }
 
   &__form-container {
     @include form-container($medium-screen);
+
+    .section-header {
+      text-align: center;
+      margin-bottom: $base-spacing;
+      font-weight: $standard-weight;
+      font-size: 115%;
+    }
   }
 }

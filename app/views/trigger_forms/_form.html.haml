@@ -1,3 +1,5 @@
+.section-header Monitored files
+
 = f.label :repository_name, 'Repository'
 = f.text_field :repository_name,
   maxlength: 64
@@ -20,6 +22,9 @@
   maxlength: 64,
   data: { 'hide-if-checked' => 'all-modified-files' }
 = f.error_messages :modified_file
+
+%hr
+.section-header Alerts
 
 = f.label :email_address_address, 'Email'
 = f.email_field :email_address_address,
