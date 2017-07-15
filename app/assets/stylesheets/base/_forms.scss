@@ -56,7 +56,6 @@ label {
 
   &.inline {
     display: inline-block;
-    font-weight: $standard-weight;
   }
 }
 
@@ -65,7 +64,6 @@ select,
 textarea {
   display: block;
   font-family: $base-font-family;
-  font-weight: $light-weight;
   font-size: $base-font-size;
 }
 
