@@ -16,8 +16,6 @@ RSpec.describe "triggers" do
       Given(:slack_webhook) { trigger.slack_webhook }
 
       When { click_link 'Add trigger' }
-      When { fill_in_trigger_builder }
-      When { click_button 'Next' }
       When { fill_in_trigger_form }
       When { click_button 'Save trigger' }
 
@@ -47,8 +45,6 @@ RSpec.describe "triggers" do
       Given(:trigger) { user.triggers.last }
 
       When { click_link 'Add trigger' }
-      When { fill_in_trigger_builder }
-      When { click_button 'Next' }
       When { fill_in_trigger_form }
       When { choose 'All branches' }
       When { click_button 'Save trigger' }
@@ -60,8 +56,6 @@ RSpec.describe "triggers" do
       Given(:trigger) { user.triggers.last }
 
       When { click_link 'Add trigger' }
-      When { fill_in_trigger_builder }
-      When { click_button 'Next' }
       When { fill_in_trigger_form }
       When { choose 'All files' }
       When { click_button 'Save trigger' }

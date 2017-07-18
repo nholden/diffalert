@@ -101,6 +101,10 @@ textarea {
   &::placeholder {
     color: tint($base-font-color, 40%);
   }
+
+  &.green-border {
+    border-color: $green !important;
+  }
 }
 
 textarea {

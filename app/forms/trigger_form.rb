@@ -18,6 +18,7 @@ class TriggerForm
     :slack_webhook_url,
     :slack_webhook_name,
     :message,
+    :github_url,
   )
 
   validates :message, :repository_name, presence: true
@@ -38,14 +39,19 @@ class TriggerForm
   end
 
   def set_default_data
-    self.repository_name = trigger.repository_name
-    self.branch = trigger.branch
-    self.all_branches = trigger.branch.nil?
-    self.modified_file = trigger.modified_file
-    self.all_modified_files = trigger.modified_file.nil?
-    self.email_address_address = trigger.email_address_address
-    self.slack_webhook_url = trigger.slack_webhook_url
-    self.message = trigger.message
+    if trigger
+      self.repository_name = trigger.repository_name
+      self.branch = trigger.branch
+      self.all_branches = trigger.branch.nil?
+      self.modified_file = trigger.modified_file
+      self.all_modified_files = trigger.modified_file.nil?
+      self.email_address_address = trigger.email_address_address
+      self.slack_webhook_url = trigger.slack_webhook_url
+      self.message = trigger.message
+    else
+      self.all_branches = false
+      self.all_modified_files = false
+    end
   end
 
   private

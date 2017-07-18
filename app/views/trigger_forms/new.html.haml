@@ -4,4 +4,17 @@
 
   .triggers__form-container
     = form_for @trigger_form, html: { novalidate: 'novalidate' } do |f|
-      - render partial: 'form', locals: { f: f }
+      .section-header GitHub link
+
+      = f.label :github_url, 'Paste the GitHub link to the file you&rsquo;d like to monitor'.html_safe
+      = f.url_field :github_url,
+        placeholder: 'https://github.com/rails/rails/blob/master/Gemfile',
+        maxlength: 128,
+        data: { 'match-data-form-populator' => 'https:\/\/github.com\/([\w\-\.]*)\/([\w\-\.]*)\/blob\/([\w\-\.]*)\/([\w\-\.\/]*)' }
+      = f.error_messages :github_url
+
+      = image_tag 'github_url_example.png', alt: 'Screenshot showing Github URL in a browser'
+
+      %hr
+
+      = render partial: 'form', locals: { f: f }
