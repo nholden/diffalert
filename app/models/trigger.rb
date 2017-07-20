@@ -9,6 +9,7 @@ class Trigger < ApplicationRecord
   scope :for_event, -> (event) { where(repository_name: event.repository_name).
                                    where('modified_file IN (?) OR modified_file IS NULL', event.modified_files).
                                    where('branch = ? OR branch IS NULL', event.branch) }
+  scope :ordered_for_index, -> { order('lower(repository_name), lower(branch), lower(modified_file)') }
 
   validates :message, :repository_name, presence: true
 

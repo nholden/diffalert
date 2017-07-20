@@ -2,7 +2,7 @@ class TriggersController < ApplicationController
 
   include RequiresSignIn
 
-  expose :triggers, -> { current_user.triggers.order('lower(repository_name)').decorate }
+  expose :triggers, -> { current_user.triggers.ordered_for_index.decorate }
 
   def index
   end
