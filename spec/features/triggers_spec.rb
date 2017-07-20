@@ -15,7 +15,7 @@ RSpec.describe "triggers" do
       Given(:email_address) { trigger.email_address }
       Given(:slack_webhook) { trigger.slack_webhook }
 
-      When { click_link 'Add trigger' }
+      When { click_link 'Create your first trigger' }
       When { fill_in_trigger_form }
       When { click_button 'Save trigger' }
 
@@ -44,7 +44,7 @@ RSpec.describe "triggers" do
     describe "creating a new Trigger for all branches" do
       Given(:trigger) { user.triggers.last }
 
-      When { click_link 'Add trigger' }
+      When { click_link 'Create your first trigger' }
       When { fill_in_trigger_form }
       When { choose 'All branches' }
       When { click_button 'Save trigger' }
@@ -55,7 +55,7 @@ RSpec.describe "triggers" do
     describe "creating a new Trigger for all modified files" do
       Given(:trigger) { user.triggers.last }
 
-      When { click_link 'Add trigger' }
+      When { click_link 'Create your first trigger' }
       When { fill_in_trigger_form }
       When { choose 'All files' }
       When { click_button 'Save trigger' }
@@ -87,20 +87,26 @@ RSpec.describe "triggers" do
     end
 
     describe "viewing triggers" do
-      Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
-
-      context "when Trigger has an Alert" do
-        around(:each) do |example|
-          VCR.use_cassette('slack/message/send') { example.run }
-        end
-
-        Given!(:alert) { FactoryGirl.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
-
-        Then { expect(page).to have_content 'about 3 hours ago' }
+      context "when no triggers exist" do
+        Then { expect(page).to have_content 'You don’t have any triggers yet! Create your first trigger.' }
       end
 
-      context "when Trigger does not have an Alert" do
-        Then { expect(page).to have_content 'Never' }
+      context "when a Trigger exists" do
+        Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+
+        context "when Trigger has an Alert" do
+          around(:each) do |example|
+            VCR.use_cassette('slack/message/send') { example.run }
+          end
+
+          Given!(:alert) { FactoryGirl.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
+
+          Then { expect(page).to have_content 'about 3 hours ago' }
+        end
+
+        context "when Trigger does not have an Alert" do
+          Then { expect(page).to have_content 'Never' }
+        end
       end
     end
   end

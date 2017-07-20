@@ -7,33 +7,39 @@
   .triggers__header
     %h1 Your triggers
 
-  .triggers__triggers-index
-    .triggers__triggers-index__headers
-      .header Repository
-      .header Branch
-      .header File
-      .header Last alert
-      .header.narrow
+  - if triggers.any?
+    .triggers__triggers-index
+      .triggers__triggers-index__headers
+        .header Repository
+        .header Branch
+        .header File
+        .header Last alert
+        .header.narrow
 
-    - triggers.each do |trigger|
-      .triggers__triggers-index__trigger
-        .attribute
-          .label Repository
-          .value= trigger.repository_name
-        .attribute
-          .label Branch
-          .value= trigger.branch
-        .attribute
-          .label File
-          .value= trigger.modified_file_name
-        .attribute
-          .label Last alert
-          .value= trigger.last_alert_time_ago
-        .attribute.narrow
-          .label Actions
-          .value
-            = link_to '&#9998;'.html_safe, edit_trigger_form_path(trigger), class: 'symbol'
-            = link_to '&#9447;'.html_safe, trigger_path(trigger), method: :delete, class: 'symbol'
+      - triggers.each do |trigger|
+        .triggers__triggers-index__trigger
+          .attribute
+            .label Repository
+            .value= trigger.repository_name
+          .attribute
+            .label Branch
+            .value= trigger.branch
+          .attribute
+            .label File
+            .value= trigger.modified_file_name
+          .attribute
+            .label Last alert
+            .value= trigger.last_alert_time_ago
+          .attribute.narrow
+            .label Actions
+            .value
+              = link_to '&#9998;'.html_safe, edit_trigger_form_path(trigger), class: 'symbol'
+              = link_to '&#9447;'.html_safe, trigger_path(trigger), method: :delete, class: 'symbol'
 
-  .triggers__new-trigger
-    = link_to 'Add trigger', new_trigger_form_path
+    .triggers__new-trigger
+      = link_to 'Add trigger', new_trigger_form_path
+
+  - else
+    .triggers__new-trigger
+      You don&rsquo;t have any triggers yet!
+      = link_to 'Create your first trigger.', new_trigger_form_path
