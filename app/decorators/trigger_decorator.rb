@@ -6,8 +6,12 @@ class TriggerDecorator < Draper::Decorator
     object.branch || 'All branches'
   end
 
-  def modified_file
-    object.modified_file || 'All files'
+  def modified_file_name
+    if object.modified_file
+      object.modified_file.split('/').last
+    else
+      'All files'
+    end
   end
 
   def last_alert_time_ago

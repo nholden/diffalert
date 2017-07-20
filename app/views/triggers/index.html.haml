@@ -11,7 +11,7 @@
     .triggers__triggers-index__headers
       .header Repository
       .header Branch
-      .header File path
+      .header File
       .header Last alert
       .header Actions
 
@@ -24,8 +24,8 @@
           .label Branch
           .value= trigger.branch
         .attribute
-          .label File path
-          .value= trigger.modified_file
+          .label File
+          .value= trigger.modified_file_name
         .attribute
           .label Last alert
           .value= trigger.last_alert_time_ago
