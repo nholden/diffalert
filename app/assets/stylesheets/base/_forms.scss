@@ -57,6 +57,12 @@ label {
   &.inline {
     display: inline-block;
   }
+
+  &.required:after {
+    color: $red;
+    content: '*';
+    display: inline;
+  }
 }
 
 input,
