@@ -13,7 +13,7 @@
       .header Branch
       .header File
       .header Last alert
-      .header Actions
+      .header.narrow
 
     - triggers.each do |trigger|
       .triggers__triggers-index__trigger
@@ -29,10 +29,11 @@
         .attribute
           .label Last alert
           .value= trigger.last_alert_time_ago
-        .attribute
+        .attribute.narrow
           .label Actions
           .value
-          #{link_to 'Edit', edit_trigger_form_path(trigger)} | #{link_to 'Delete', trigger_path(trigger), method: :delete}
+            = link_to '&#9998;'.html_safe, edit_trigger_form_path(trigger), class: 'symbol'
+            = link_to '&#9447;'.html_safe, trigger_path(trigger), method: :delete, class: 'symbol'
 
   .triggers__new-trigger
     = link_to 'Add trigger', new_trigger_form_path

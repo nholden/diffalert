@@ -66,7 +66,7 @@ RSpec.describe "triggers" do
     describe "deleting a Trigger" do
       Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
 
-      When { click_link 'Delete' }
+      When { click_link 'ⓧ' }
 
       Then { expect(page).to have_content 'Trigger deleted.' }
       And { expect(page).to_not have_content(trigger.modified_file) }
@@ -76,7 +76,7 @@ RSpec.describe "triggers" do
     describe "editing a Trigger" do
       Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
 
-      When { click_link 'Edit' }
+      When { click_link '✎' }
       When { fill_in 'Branch', with: 'staging' }
       When { click_button 'Save trigger' }
       When { trigger.reload }

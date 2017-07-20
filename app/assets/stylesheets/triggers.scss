@@ -4,7 +4,7 @@ $triggers-index: (
 );
 
 $triggers-index--large-up: (
-  columns: 5,
+  columns: 9,
   gutter: 0,
   media: $large-screen,
 );
@@ -31,9 +31,12 @@ $triggers-index--large-up: (
         display: table-row;
 
         .header {
-          @include grid-column(1);
-          border-bottom: 1px solid shade($base-border-color, 25%);
+          @include grid-column(2);
           padding: $small-spacing 0;
+
+          &.narrow {
+            @include grid-column(1);
+          }
         }
       }
     }
@@ -49,9 +52,12 @@ $triggers-index--large-up: (
       }
 
       .attribute {
+        display: table;
+        width: 100%;
+
         .label {
           @include grid_column(1, $triggers-index);
-          display: inline-block;
+          display: table-cell;
 
           @include grid-media($triggers-index--large-up) {
             display: none;
@@ -60,13 +66,23 @@ $triggers-index--large-up: (
 
         .value {
           @include grid_column(2, $triggers-index);
+          display: table-cell;
+
+          .symbol {
+            font-size: 110%;
+            margin-right: $small-spacing;
+          }
         }
 
         @include grid-media($triggers-index--large-up) {
-          @include grid-column(1);
+          @include grid-column(2);
           border-top: $base-border;
           padding: $small-spacing 0;
           display: table-cell;
+
+          &.narrow {
+            @include grid-column(1);
+          }
         }
       }
     }
