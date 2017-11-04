@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  sequence :address { |n| "factory-email-#{n}@gmail.com" }
-  sequence :confirmation_token { |n| "tok3n-#{n}" }
+  sequence(:address) { |n| "factory-email-#{n}@gmail.com" }
+  sequence(:confirmation_token) { |n| "tok3n-#{n}" }
 
   factory :email_address do
     address

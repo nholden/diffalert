@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  sequence :username { |n| "factory-email-#{n}@gmail.com" }
-  sequence :github_events_secret { |n| "s3cr3t-#{n}" }
+  sequence(:username) { |n| "factory-email-#{n}@gmail.com" }
+  sequence(:github_events_secret) { |n| "s3cr3t-#{n}" }
 
   factory :user do
     password "password"

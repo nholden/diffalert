@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.4.1'
+ruby `cat .ruby-version`.chomp
 
-gem 'rails', '5.1.3'
+gem 'rails', '5.1.4'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
