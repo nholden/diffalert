@@ -18,3 +18,7 @@
 
 # Ignore development environment variables
 .env
+
+# Ignore folders that Webpacker will ignore when added
+node_modules/
+public/packs/

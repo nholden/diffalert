@@ -31,7 +31,7 @@
 
 = f.label :email_address_address, 'Email'
 = f.email_field :email_address_address,
-  data: { 'email-address-selectize' => true },
+  data: { selectize: f.object.decorate.email_selectize_params.merge({ 'missing-text-container-selector' => '[data-email-name-container]' }).to_json.html_safe },
   maxlength: 64
 = f.error_messages :email_address_address
 
@@ -41,19 +41,9 @@
     maxlength: 64
   = f.error_messages :email_address_name
 
-:javascript
-  TextInputToSelectize(
-    $('[data-email-address-selectize]'),
-    {
-      items: #{f.object.decorate.email_selectize_items},
-      options: #{f.object.decorate.email_selectize_options},
-      missingTextContainer: $('[data-email-name-container]'),
-    }
-  );
-
 = f.label :slack_webhook_url, 'Slack webhook URL'
 = f.url_field :slack_webhook_url,
-  data: { 'slack-webhook-selectize' => true },
+  data: { selectize: f.object.decorate.slack_webhook_selectize_params.merge({ 'missing-text-container-selector' => '[data-slack-webhook-name-container]' }).to_json.html_safe },
   maxlength: 128
 = f.error_messages :slack_webhook_url
 
@@ -62,16 +52,6 @@
   = f.text_field :slack_webhook_name,
     maxlength: 64
   = f.error_messages :slack_webhook_name
-
-:javascript
-  TextInputToSelectize(
-    $('[data-slack-webhook-selectize]'),
-    {
-      items: #{f.object.decorate.slack_webhook_selectize_items},
-      options: #{f.object.decorate.slack_webhook_selectize_options},
-      missingTextContainer: $('[data-slack-webhook-name-container]'),
-    }
-  );
 
 = f.label :message, 'Message', class: 'required'
 = f.text_area :message,

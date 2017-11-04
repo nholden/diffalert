@@ -1,8 +1,8 @@
-class window.TextInputToSelectize
-  constructor: (input, opts) ->
-    input.selectize(
-      items: opts.items
-      options: opts.options
+class TextInputToSelectize
+  constructor: (input, {items, options, missingTextContainer}) ->
+    $(input).selectize(
+      items: items
+      options: options
       create: true
       maxItems: 1
       render: {
@@ -14,16 +14,16 @@ class window.TextInputToSelectize
           "<div><div>#{escape(data.value)}</div><div class='option-label'>#{escape(label)}</div></div>"
       }
       onChange: ->
-        if opts.missingTextContainer? then opts.missingTextContainer.find('input').val('')
+        if missingTextContainer? then missingTextContainer.find('input').val('')
       onBlur: ->
-        if opts.missingTextContainer?
+        if missingTextContainer?
           itemValue = this.items[0]
 
           if itemValue?
             itemText = this.options[itemValue].text
-            if itemText? && itemText != itemValue then opts.missingTextContainer.hide() else opts.missingTextContainer.show()
+            if itemText? && itemText != itemValue then missingTextContainer.hide() else missingTextContainer.show()
           else
-            opts.missingTextContainer.hide()
+            missingTextContainer.hide()
       onInitialize: ->
         itemValue = this.items[0]
 
@@ -32,10 +32,20 @@ class window.TextInputToSelectize
         if itemValue?
           this.hideInput()
 
-        if opts.missingTextContainer?
+        if missingTextContainer?
           if itemValue?
             itemText = this.options[itemValue].text
-            if itemText? && itemText != itemValue then opts.missingTextContainer.hide() else opts.missingTextContainer.show()
+            if itemText? && itemText != itemValue then missingTextContainer.hide() else missingTextContainer.show()
           else
-            opts.missingTextContainer.hide()
+            missingTextContainer.hide()
     )
+
+$(document).on 'turbolinks:load', ->
+  $('[data-selectize]').each((index, input) ->
+    data = $(input).data('selectize')
+
+    new TextInputToSelectize(
+      input,
+      { items: data.items, options: data.options, missingTextContainer: $(data['missing-text-container-selector']) }
+    )
+  )

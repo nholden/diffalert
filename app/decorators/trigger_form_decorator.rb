@@ -1,22 +1,36 @@
 class TriggerFormDecorator < Draper::Decorator
 
-  def email_selectize_items
-    [object.email_address_address].compact.to_json.html_safe
+  def email_selectize_params
+    {
+      items: email_selectize_items,
+      options: email_selectize_options,
+    }
   end
 
-  def email_selectize_options
-    ([current_email_selectize_data] + non_current_emails_selectize_data).compact.to_json.html_safe
-  end
-
-  def slack_webhook_selectize_items
-    [object.slack_webhook_url].compact.to_json.html_safe
-  end
-
-  def slack_webhook_selectize_options
-    ([current_slack_webhook_selectize_data] + non_current_slack_webhook_selectize_data).compact.to_json.html_safe
+  def slack_webhook_selectize_params
+    {
+      items: slack_webhook_selectize_items,
+      options: slack_webhook_selectize_options,
+    }
   end
 
   private
+
+  def email_selectize_items
+    [object.email_address_address].compact
+  end
+
+  def email_selectize_options
+    ([current_email_selectize_data] + non_current_emails_selectize_data).compact
+  end
+
+  def slack_webhook_selectize_items
+    [object.slack_webhook_url].compact
+  end
+
+  def slack_webhook_selectize_options
+    ([current_slack_webhook_selectize_data] + non_current_slack_webhook_selectize_data).compact
+  end
 
   def current_email_selectize_data
     return unless object.email_address_address.present?
