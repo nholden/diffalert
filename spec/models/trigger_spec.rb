@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Trigger, type: :model do
 
   describe "validations" do
-    Given(:trigger) { FactoryGirl.create(:trigger) }
+    Given(:trigger) { FactoryBot.create(:trigger) }
 
     describe "modified_file" do
       Given { trigger.modified_file = modified_file }

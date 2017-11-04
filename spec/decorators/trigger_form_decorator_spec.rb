@@ -21,8 +21,8 @@ RSpec.describe TriggerFormDecorator do
 
   describe "#email_selectize_options" do
     Given { trigger_form.user = user }
-    Given(:user) { FactoryGirl.create(:user) }
-    Given { FactoryGirl.create(:email_address, :alert, user: user, address: 'zoinks@bloop.net', name: 'Zoinks personal') }
+    Given(:user) { FactoryBot.create(:user) }
+    Given { FactoryBot.create(:email_address, :alert, user: user, address: 'zoinks@bloop.net', name: 'Zoinks personal') }
 
     When(:result) { decorator.email_selectize_options }
 
@@ -71,8 +71,8 @@ RSpec.describe TriggerFormDecorator do
 
   describe "#slack_webhook_selectize_options" do
     Given { trigger_form.user = user }
-    Given(:user) { FactoryGirl.create(:user) }
-    Given { FactoryGirl.create(:slack_webhook, user: user, url: 'https://hooks.slack.com/services/BEEPBOOP', name: '#watercooler') }
+    Given(:user) { FactoryBot.create(:user) }
+    Given { FactoryBot.create(:slack_webhook, user: user, url: 'https://hooks.slack.com/services/BEEPBOOP', name: '#watercooler') }
 
     When(:result) { decorator.slack_webhook_selectize_options }
 

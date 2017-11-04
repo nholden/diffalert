@@ -26,7 +26,7 @@ gem 'draper'
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara'
   gem 'launchy'
   gem 'dotenv-rails'

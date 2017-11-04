@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   sequence(:username) { |n| "factory-email-#{n}@gmail.com" }
   sequence(:github_events_secret) { |n| "s3cr3t-#{n}" }
 

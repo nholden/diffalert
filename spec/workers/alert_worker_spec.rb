@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AlertWorker do
 
-  Given(:alert) { FactoryGirl.create(:alert, email: email, slack_webhook_url: slack_webhook_url) }
+  Given(:alert) { FactoryBot.create(:alert, email: email, slack_webhook_url: slack_webhook_url) }
   Given(:emails) { ActionMailer::Base.deliveries }
   Given(:slack_messages) { SlackInterceptor.messages }
   Given { ActionMailer::Base.deliveries.clear && SlackInterceptor.messages.clear }

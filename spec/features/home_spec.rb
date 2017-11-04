@@ -3,7 +3,7 @@ require 'support/authentication_helper'
 
 RSpec.describe "home" do
 
-  Given(:user) { FactoryGirl.create(:user) }
+  Given(:user) { FactoryBot.create(:user) }
 
   context "authenticated" do
     When { log_in_as user }

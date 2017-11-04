@@ -4,7 +4,7 @@ require 'support/trigger_form_helper'
 
 RSpec.describe "triggers" do
 
-  Given(:user) { FactoryGirl.create(:user) }
+  Given(:user) { FactoryBot.create(:user) }
 
   context "authenticated" do
     When { log_in_as user }
@@ -64,7 +64,7 @@ RSpec.describe "triggers" do
     end
 
     describe "deleting a Trigger" do
-      Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+      Given!(:trigger) { FactoryBot.create(:trigger, user: user) }
 
       When { click_link 'ⓧ' }
 
@@ -74,7 +74,7 @@ RSpec.describe "triggers" do
     end
 
     describe "editing a Trigger" do
-      Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+      Given!(:trigger) { FactoryBot.create(:trigger, user: user) }
 
       When { click_link '✎' }
       When { fill_in 'Branch', with: 'staging' }
@@ -92,14 +92,14 @@ RSpec.describe "triggers" do
       end
 
       context "when a Trigger exists" do
-        Given!(:trigger) { FactoryGirl.create(:trigger, user: user) }
+        Given!(:trigger) { FactoryBot.create(:trigger, user: user) }
 
         context "when Trigger has an Alert" do
           around(:each) do |example|
             VCR.use_cassette('slack/message/send') { example.run }
           end
 
-          Given!(:alert) { FactoryGirl.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
+          Given!(:alert) { FactoryBot.create(:alert, trigger: trigger, created_at: 3.hours.ago) }
 
           Then { expect(page).to have_content 'about 3 hours ago' }
         end

@@ -127,8 +127,8 @@ RSpec.describe TriggerForm, type: :model do
 
   describe "#save!" do
     Given(:trigger_form) { TriggerForm.new(default_attrs.merge({ trigger: trigger, user: trigger.user, email_address: email_address })) }
-    Given(:trigger) { FactoryGirl.create(:trigger, email_address: email_address) }
-    Given(:email_address) { FactoryGirl.create(:email_address, :alert, name: 'Gmail') }
+    Given(:trigger) { FactoryBot.create(:trigger, email_address: email_address) }
+    Given(:email_address) { FactoryBot.create(:email_address, :alert, name: 'Gmail') }
 
     When { trigger_form.save! }
     When { email_address.reload }

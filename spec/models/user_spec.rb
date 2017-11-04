@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 
   describe "validations" do
-    Given(:user) { User.new(FactoryGirl.attributes_for(:user)) }
+    Given(:user) { User.new(FactoryBot.attributes_for(:user)) }
 
     context "username" do
       When { user.username = username }
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
       end
 
       context "it is invalid when another user with that username exists" do
-        Given { FactoryGirl.create(:user, username: 'dustin@firsttraxcoffee.com') }
+        Given { FactoryBot.create(:user, username: 'dustin@firsttraxcoffee.com') }
         Given(:username) { 'Dustin@firsttraxcoffee.com' }
 
         Then { !user.valid? }

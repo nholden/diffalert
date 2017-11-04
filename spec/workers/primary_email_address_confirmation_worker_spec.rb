@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PrimaryEmailAddressConfirmationWorker do
 
-  Given(:email_address) { FactoryGirl.create(:email_address, :primary, address: 'new@user.com') }
+  Given(:email_address) { FactoryBot.create(:email_address, :primary, address: 'new@user.com') }
   Given(:message) { ActionMailer::Base.deliveries.last }
   Given(:message_body) { convert_to_text(message.html_part.to_s) }
   Given { ActionMailer::Base.deliveries.clear }

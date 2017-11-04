@@ -30,7 +30,7 @@ RSpec.describe UserRegistration, type: :model do
       end
 
       context "it is invalid when a user with that username exists" do
-        Given { FactoryGirl.create(:user, username: 'dustin@firsttraxcoffee.com') }
+        Given { FactoryBot.create(:user, username: 'dustin@firsttraxcoffee.com') }
         Given(:username) { 'Dustin@firsttraxcoffee.com' }
 
         Then { !user_registration.valid? }

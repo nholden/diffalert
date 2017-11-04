@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Github event responses" do
 
   describe "POST /users/:user_id/github" do
-    Given(:user) { FactoryGirl.create(:user) }
+    Given(:user) { FactoryBot.create(:user) }
     Given(:response_hash) { JSON.load(response.body) }
     Given(:modified_file) { "README.md" }
     Given(:branch) { "master" }
@@ -37,7 +37,7 @@ RSpec.describe "Github event responses" do
           VCR.use_cassette('slack/message/send') { example.run }
         end
 
-        Given!(:trigger) { FactoryGirl.create(:trigger,
+        Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
                                               modified_file: modified_file,
                                               branch: branch,
@@ -71,7 +71,7 @@ RSpec.describe "Github event responses" do
       end
 
       context "when trigger exists for modified file on any branch" do
-        Given!(:trigger) { FactoryGirl.create(:trigger,
+        Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
                                               modified_file: modified_file,
                                               branch: nil,
@@ -84,7 +84,7 @@ RSpec.describe "Github event responses" do
       end
 
       context "when trigger exists for any modified file on branch" do
-        Given!(:trigger) { FactoryGirl.create(:trigger,
+        Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
                                               modified_file: nil,
                                               branch: branch,
@@ -97,7 +97,7 @@ RSpec.describe "Github event responses" do
       end
 
       context "when trigger exists for modified file on different branch" do
-        Given!(:trigger) { FactoryGirl.create(:trigger,
+        Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
                                               modified_file: modified_file,
                                               branch: "not-master",
@@ -107,7 +107,7 @@ RSpec.describe "Github event responses" do
       end
 
       context "when trigger exists for modified file on different repo" do
-        Given!(:trigger) { FactoryGirl.create(:trigger,
+        Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
                                               modified_file: modified_file,
                                               branch: branch,

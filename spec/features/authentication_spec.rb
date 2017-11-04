@@ -4,7 +4,7 @@ require 'support/authentication_helper'
 RSpec.describe "authentication" do
 
   describe "log in" do
-    Given { FactoryGirl.create(:user, username: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
+    Given { FactoryBot.create(:user, username: 'nick@nickholden.io', password: 'letmein', password_confirmation: 'letmein') }
 
     When { visit new_session_path }
     When { fill_in 'Email', with: 'nick@nickholden.io' }
@@ -25,7 +25,7 @@ RSpec.describe "authentication" do
   end
 
   describe "log out" do
-    Given(:user) { FactoryGirl.create(:user) }
+    Given(:user) { FactoryBot.create(:user) }
 
     When { log_in_as user }
     When { click_link 'Log out' }
