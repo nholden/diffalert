@@ -1,12 +1,10 @@
 module Github
   class PushEvent < Struct.new(:payload_hash)
 
-    def modified_files
-      if pull_request_merge?
-        head_commit[:modified]
-      else
-        commits.map { |commit| commit[:modified] }.flatten.compact.uniq
-      end
+    def modified_paths
+      modified_files.map do |modified_file|
+        Pathname.new(modified_file).ascend.to_a.map(&:to_s)
+      end.flatten.compact.uniq
     end
 
     def branch
@@ -20,6 +18,14 @@ module Github
     end
 
     private
+
+    def modified_files
+      if pull_request_merge?
+        head_commit[:modified]
+      else
+        commits.map { |commit| commit[:modified] }.flatten.compact.uniq
+      end
+    end
 
     def commits
       payload_hash[:commits] || []

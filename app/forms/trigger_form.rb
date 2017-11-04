@@ -11,8 +11,8 @@ class TriggerForm
     :repository_name,
     :branch,
     :all_branches,
-    :modified_file,
-    :all_modified_files,
+    :modified_path,
+    :all_modified_paths,
     :email_address_address,
     :email_address_name,
     :slack_webhook_url,
@@ -22,7 +22,7 @@ class TriggerForm
   )
 
   validates :message, :repository_name, presence: true
-  validates :modified_file, presence: true, unless: :all_modified_files_chosen?
+  validates :modified_path, presence: true, unless: :all_modified_paths_chosen?
   validates :branch, presence: true, unless: :all_branches_chosen?
   validates :email_address_address, format: { with: Patterns::EMAIL_REGEX }, allow_blank: true
   validates :slack_webhook_url, format: { with: Patterns::SLACK_WEBHOOK_URL_REGEX }, allow_blank: true
@@ -43,14 +43,14 @@ class TriggerForm
       self.repository_name = trigger.repository_name
       self.branch = trigger.branch
       self.all_branches = trigger.branch.nil?
-      self.modified_file = trigger.modified_file
-      self.all_modified_files = trigger.modified_file.nil?
+      self.modified_path = trigger.modified_path
+      self.all_modified_paths = trigger.modified_path.nil?
       self.email_address_address = trigger.email_address_address
       self.slack_webhook_url = trigger.slack_webhook_url
       self.message = trigger.message
     else
       self.all_branches = false
-      self.all_modified_files = false
+      self.all_modified_paths = false
     end
   end
 
@@ -90,7 +90,7 @@ class TriggerForm
     self.trigger.user = user
     self.trigger.repository_name = repository_name
     self.trigger.branch = all_branches_chosen? ? nil : branch
-    self.trigger.modified_file = all_modified_files_chosen? ? nil : modified_file
+    self.trigger.modified_path = all_modified_paths_chosen? ? nil : modified_path
     self.trigger.message = message
     self.trigger.email_address = email_address
     self.trigger.slack_webhook = slack_webhook
@@ -104,8 +104,8 @@ class TriggerForm
     end
   end
 
-  def all_modified_files_chosen?
-    all_modified_files == 'true'
+  def all_modified_paths_chosen?
+    all_modified_paths == 'true'
   end
 
   def all_branches_chosen?

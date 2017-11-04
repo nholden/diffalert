@@ -4,7 +4,7 @@ class AlertMailer < ApplicationMailer
 
   def modified_file_email(alert)
     @alert = alert
-    mail(to: @alert.email, subject: "DiffAlert: #{@alert.trigger.modified_file || 'A file'} has been modified")
+    mail(to: @alert.email, subject: "DiffAlert: #{@alert.trigger.modified_path || 'A file'} has been modified")
   end
 
 end

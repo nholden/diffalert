@@ -5,16 +5,16 @@ RSpec.describe Trigger, type: :model do
   describe "validations" do
     Given(:trigger) { FactoryBot.create(:trigger) }
 
-    describe "modified_file" do
-      Given { trigger.modified_file = modified_file }
+    describe "modified_path" do
+      Given { trigger.modified_path = modified_path }
 
-      context "it is valid with a modified file" do
-        When(:modified_file) { 'abc.rb' }
+      context "it is valid with a modified path" do
+        When(:modified_path) { 'abc.rb' }
         Then { trigger.valid? }
       end
 
-      context "it is valid with a blank modified file" do
-        When(:modified_file) { ' ' }
+      context "it is valid with a blank modified path" do
+        When(:modified_path) { ' ' }
         Then { trigger.valid? }
       end
     end

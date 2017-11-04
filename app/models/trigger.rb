@@ -7,9 +7,9 @@ class Trigger < ApplicationRecord
   has_one :recent_alert, -> { order(created_at: :desc) }, class_name: 'Alert'
 
   scope :for_event, -> (event) { where(repository_name: event.repository_name).
-                                   where('modified_file IN (?) OR modified_file IS NULL', event.modified_files).
+                                   where('modified_path IN (?) OR modified_path IS NULL', event.modified_paths).
                                    where('branch = ? OR branch IS NULL', event.branch) }
-  scope :ordered_for_index, -> { order('lower(repository_name), lower(branch), lower(modified_file)') }
+  scope :ordered_for_index, -> { order('lower(repository_name), lower(branch), lower(modified_path)') }
 
   validates :message, :repository_name, presence: true
 

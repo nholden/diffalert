@@ -28,7 +28,7 @@ RSpec.describe "triggers" do
 
       And { trigger.repository_name == 'sandbox' }
       And { trigger.branch == 'master' }
-      And { trigger.modified_file == 'README.md' }
+      And { trigger.modified_path == 'README.md' }
       And { trigger.message == 'README.md changed!' }
 
       And { email_address.address == 'qwerty@slack.com' }
@@ -60,7 +60,7 @@ RSpec.describe "triggers" do
       When { choose 'All files' }
       When { click_button 'Save trigger' }
 
-      Then { trigger.modified_file.nil? }
+      Then { trigger.modified_path.nil? }
     end
 
     describe "deleting a Trigger" do
@@ -69,7 +69,7 @@ RSpec.describe "triggers" do
       When { click_link 'ⓧ' }
 
       Then { expect(page).to have_content 'Trigger deleted.' }
-      And { expect(page).to_not have_content(trigger.modified_file) }
+      And { expect(page).to_not have_content(trigger.modified_path) }
       And { !Trigger.find_by_id(trigger.id) }
     end
 

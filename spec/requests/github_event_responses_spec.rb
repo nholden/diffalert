@@ -39,7 +39,7 @@ RSpec.describe "Github event responses" do
 
         Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
-                                              modified_file: modified_file,
+                                              modified_path: modified_file,
                                               branch: branch,
                                               repository_name: repository_name) }
 
@@ -73,9 +73,24 @@ RSpec.describe "Github event responses" do
       context "when trigger exists for modified file on any branch" do
         Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
-                                              modified_file: modified_file,
+                                              modified_path: modified_file,
                                               branch: nil,
                                               repository_name: repository_name) }
+
+        Then { alert.trigger == trigger }
+        And { alert.email == trigger.email_address_address }
+        And { alert.slack_webhook_url == trigger.slack_webhook.url }
+        And { alert.message == trigger.message }
+      end
+
+      context "when trigger exists for parent directory on branch" do
+        Given(:modified_file) { 'app/models/user.rb' }
+
+        Given!(:trigger) { FactoryBot.create(:trigger,
+                                             user: user,
+                                             modified_path: 'app/models',
+                                             branch: branch,
+                                             repository_name: repository_name) }
 
         Then { alert.trigger == trigger }
         And { alert.email == trigger.email_address_address }
@@ -86,7 +101,7 @@ RSpec.describe "Github event responses" do
       context "when trigger exists for any modified file on branch" do
         Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
-                                              modified_file: nil,
+                                              modified_path: nil,
                                               branch: branch,
                                               repository_name: repository_name) }
 
@@ -99,7 +114,7 @@ RSpec.describe "Github event responses" do
       context "when trigger exists for modified file on different branch" do
         Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
-                                              modified_file: modified_file,
+                                              modified_path: modified_file,
                                               branch: "not-master",
                                               repository_name: repository_name) }
 
@@ -109,7 +124,7 @@ RSpec.describe "Github event responses" do
       context "when trigger exists for modified file on different repo" do
         Given!(:trigger) { FactoryBot.create(:trigger,
                                               user: user,
-                                              modified_file: modified_file,
+                                              modified_path: modified_file,
                                               branch: branch,
                                               repository_name: "not-sandbox") }
 

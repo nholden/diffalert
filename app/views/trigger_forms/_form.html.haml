@@ -16,15 +16,15 @@
   = f.text_field :branch, maxlength: 64, data: { 'match-data-field' => 3 }
   = f.error_messages :branch
 
-= f.label :modified_file, 'File path', class: 'required'
-= f.radio_button :all_modified_files, true, data: { 'toggler' => 'all-modified-files' }
-= f.label :all_modified_files_true, 'All files', class: 'inline'
+= f.label :modified_path, 'Path', class: 'required'
+= f.radio_button :all_modified_paths, true, data: { 'toggler' => 'all-modified-paths' }
+= f.label :all_modified_paths_true, 'All files', class: 'inline'
 %br
-= f.radio_button :all_modified_files, false
-= f.label :all_modified_files_false, 'Specific file', class: 'inline'
-.indented{ data: { 'hide-if-checked' => 'all-modified-files' } }
-  = f.text_field :modified_file, maxlength: 64, data: { 'match-data-field' => 4 }
-  = f.error_messages :modified_file
+= f.radio_button :all_modified_paths, false
+= f.label :all_modified_paths_false, 'Specific file or directory', class: 'inline'
+.indented{ data: { 'hide-if-checked' => 'all-modified-paths' } }
+  = f.text_field :modified_path, maxlength: 64, data: { 'match-data-field' => 4 }
+  = f.error_messages :modified_path
 
 %hr
 .section-header Alerts

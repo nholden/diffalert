@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :trigger do
     user
-    modified_file "todo.md"
+    modified_path "todo.md"
     message "Hello world!"
     branch "master"
     repository_name "sandbox"

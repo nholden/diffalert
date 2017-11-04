@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe TriggerForm, type: :model do
 
   Given(:default_attrs) { {
-    modified_file: "todo.md",
+    modified_path: "todo.md",
     email_address_address: "test@gmail.com",
     slack_webhook_url: "https://hooks.slack.com/services/FOO/BAR/FOOBAR",
     message: "Hello world!",
@@ -14,23 +14,23 @@ RSpec.describe TriggerForm, type: :model do
   describe "validations" do
     Given(:trigger_form) { TriggerForm.new(default_attrs) }
 
-    describe "modified_file" do
-      Given { trigger_form.modified_file = modified_file }
+    describe "modified_path" do
+      Given { trigger_form.modified_path = modified_path }
 
-      context "it is valid with a modified file" do
-        When(:modified_file) { 'abc.rb' }
+      context "it is valid with a modified path" do
+        When(:modified_path) { 'abc.rb' }
         Then { trigger_form.valid? }
       end
 
-      context "it is valid with a blank modified file when all files chosen" do
-        Given { trigger_form.all_modified_files = "true" }
-        When(:modified_file) { ' ' }
+      context "it is valid with a blank modified file when all paths chosen" do
+        Given { trigger_form.all_modified_paths = "true" }
+        When(:modified_paths) { ' ' }
         Then { trigger_form.valid? }
       end
 
-      context "it is invalid with a blank modified file when all files not chosen" do
-        Given { trigger_form.all_modified_files = "false" }
-        When(:modified_file) { ' ' }
+      context "it is invalid with a blank modified file when all paths not chosen" do
+        Given { trigger_form.all_modified_paths = "false" }
+        When(:modified_path) { ' ' }
         Then { !trigger_form.valid? }
       end
     end

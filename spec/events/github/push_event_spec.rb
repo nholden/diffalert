@@ -9,12 +9,12 @@ RSpec.describe Github::PushEvent do
       commits: [
         {
           modified: [
-            "README.md"
+            "app/models/user.rb",
           ],
         },
         {
           modified: [
-            "todo.txt"
+            "app/models/order.rb"
           ],
         },
       ],
@@ -24,9 +24,9 @@ RSpec.describe Github::PushEvent do
     }
   }
 
-  describe "#modified_files" do
+  describe "#modified_paths" do
     context "when push is not a pull request merge it looks at all commits" do
-      Then { expect(push_event.modified_files).to match_array(['README.md', 'todo.txt']) }
+      Then { expect(push_event.modified_paths).to match_array(['app', 'app/models', 'app/models/user.rb', 'app/models/order.rb']) }
     end
 
     context "when push is a pull request merge it only looks at merge commit" do
@@ -35,7 +35,7 @@ RSpec.describe Github::PushEvent do
         modified: ['README.md'],
       } }
 
-      Then { expect(push_event.modified_files).to match_array(['README.md']) }
+      Then { expect(push_event.modified_paths).to match_array(['README.md']) }
     end
   end
 
