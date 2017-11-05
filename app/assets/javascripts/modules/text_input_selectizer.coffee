@@ -1,5 +1,17 @@
-class TextInputToSelectize
-  constructor: (input, {items, options, missingTextContainer}) ->
+class TextInputSelectizer
+  constructor: ->
+    $(document).on 'ready turbolinks:load', =>
+      $('[data-selectize]').each((index, input) =>
+        data = $(input).data('selectize')
+
+        @selectizeInput(input, {
+          items: data.items
+          options: data.options
+          missingTextContainer: $(data['missing-text-container-selector'])
+        })
+      )
+    
+  selectizeInput: (input, {items, options, missingTextContainer}) ->
     $(input).selectize(
       items: items
       options: options
@@ -40,12 +52,4 @@ class TextInputToSelectize
             missingTextContainer.hide()
     )
 
-$(document).on 'turbolinks:load', ->
-  $('[data-selectize]').each((index, input) ->
-    data = $(input).data('selectize')
-
-    new TextInputToSelectize(
-      input,
-      { items: data.items, options: data.options, missingTextContainer: $(data['missing-text-container-selector']) }
-    )
-  )
+new TextInputSelectizer
